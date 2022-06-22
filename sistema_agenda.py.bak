@@ -150,7 +150,7 @@ def enviar_email():
     try:
         outlook = win32.Dispatch('outlook.application')
         email = outlook.CreateItem(0)
-        email.To = "seu_email"
+        email.To = "rgo_junior@hotmail.com"
         email.Subject = "Cadastro de Agenda"
         email.HTMLBody = """
         <p>Olá,</p>
