@@ -1,4 +1,9 @@
-# TABUADA PYTHON, UTILIZANDO LOOP WHILE.
+###################################################
+# Tabuada Python com estrutura de repetição While #
+###################################################
+
+# O programa inicia em 1 e termina em 10
+# O programa também pergunta se deseja continuar com a tabuada [S/N]
 
 def titulo(txt):
     print("\033[96m-\033[0;0m" *30)
