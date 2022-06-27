@@ -166,14 +166,14 @@ def enviar_email():
     try:
         outlook = win32.Dispatch('outlook.application')
         email = outlook.CreateItem(0)
-        email.To = "rgo_junior@hotmail.com"
+        email.To = "seu_email@email.com"
         email.Subject = "Cadastro de Agenda"
         email.HTMLBody = """
         <p>Olá,</p>
         
         <p>Segue a lista de agenda cadastrado.</p>  
         """
-        anexo = "C:/Users/Dell/Documents/Eng/Projetos/cadastro_agenda.txt"
+        anexo = "C:/Users/Dell/Documents/Eng/Projetos/lista_agenda.xlsx"
         email.Attachments.Add(anexo)
         email.Save()
         email.Send()
