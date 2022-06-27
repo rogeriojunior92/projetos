@@ -1,4 +1,5 @@
 import os
+import pandas as pd
 from time import sleep
 from datetime import datetime
 import win32com.client as win32
@@ -41,7 +42,7 @@ def novo_arquivo():
     os.system("pause")
 
 
-# Função para criar arquivo
+# Função para cadastrar
 def novo_cadastro():
     os.system("cls")
 
@@ -143,6 +144,21 @@ def atualizar_cadastro():
     pass
     os.system("pause")
 
+
+def relatorio_excel():
+    print("\033[32mGERANDO RELATÓRIO EXCEL...\33[m")
+    sleep(1)
+    try:
+        df = pd.DataFrame(lista_agenda, columns=["Nome","Telefone","E-mail"])
+        df.to_excel("lista_agenda.xlsx")
+    except:
+        sleep(0.5)
+        print(f"\033[31mERRO! Não foi possível criar o relatório\33[m")
+    else:
+        sleep(0.5)
+        print("\033[32mRelatório criado com sucesso.\33[m")
+
+
 def enviar_email():
     os.system("cls")
     titulo("\033[32mENVIAR E-MAIL\33[m".center(60))
@@ -150,7 +166,7 @@ def enviar_email():
     try:
         outlook = win32.Dispatch('outlook.application')
         email = outlook.CreateItem(0)
-        email.To = "seu_email"
+        email.To = "rgo_junior@hotmail.com"
         email.Subject = "Cadastro de Agenda"
         email.HTMLBody = """
         <p>Olá,</p>
@@ -172,7 +188,7 @@ def enviar_email():
 def menu():
     while True:
         titulo("MENU - SISTEMA DE AGENDA".center(60))
-        print("1 - NOVO ARQUIVO\n2 - CADASTRAR CONTATO\n3 - IMPRIMIR CONTATO\n4 - BUSCAR CONTATO\n5 - DELETAR CONTATO\n6 - ATUALIZAR CONTATO\n7 - ENVIAR E-MAIL\n8 - SAIR")
+        print("1 - NOVO ARQUIVO\n2 - CADASTRAR CONTATO\n3 - IMPRIMIR CONTATO\n4 - BUSCAR CONTATO\n5 - DELETAR CONTATO\n6 - ATUALIZAR CONTATO\n7 - CRIAR RELATÓRIO EXCEL\n8 - ENVIAR E-MAIL\n9 - SAIR")
         print("\033[34m-\033[0;0m" *60)
         print(f"Ao todo foram cadastrado(s): \033[32m{len(lista_agenda)}\33[m contato(s)")
         print("\033[34m-\033[0;0m" *60)
@@ -191,8 +207,10 @@ def menu():
         elif opcao == 6:
             atualizar_cadastro()
         elif opcao == 7:
-            enviar_email()
+            relatorio_excel()
         elif opcao == 8:
+            enviar_email()
+        elif opcao == 9:
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
         else:
