@@ -7,13 +7,14 @@ import win32com.client as win32
 lista_agenda = []
 limite_agenda = 15
 
-
+# Função para criar titulo e linhas
 def titulo(txt):
     print("\033[34m-\033[0;0m" *60)
     print('\033[34m'+txt+'\033[0;0m')
     print("\033[34m-\033[0;0m" *60)
 
 
+# Função para ler número inteiro
 def leiaInt(msg):
     while True:
         try:
@@ -42,7 +43,7 @@ def novo_arquivo():
     os.system("pause")
 
 
-# Função para cadastrar
+# Função para cadastrar um novo usuário
 def novo_cadastro():
     os.system("cls")
 
@@ -138,13 +139,30 @@ def deletar_cadastro():
 
 
 # Função que atualiza os dados
+# https://forum.scriptbrasil.com.br/topic/177853-atualiza-cadastro-em-arquivo-txt/
 def atualizar_cadastro():
     os.system("cls")
     titulo("\033[32mATUALIZAR CONTATO PELO O NOME INFORMADO\33[m".center(60))
-    pass
+    termo = input("• Informe o nome do contato para atualizar: ")
+    arquivo = open("cadastro_agenda.txt", "rt")
+    for linha in arquivo:
+        if termo in linha:
+            lista = list(linha)
+            lista = linha.split()
+        print("Usuário localizado")
+    print("\033[34m-\033[0;0m" *60)
+    print("1 - NOME\n2 - TELEFONE\n3 - E-MAIL")
+    print("\033[34m-\033[0;0m" *60)
+    opcao = leiaInt("Digite a sua opção: ")
+    if opcao == 1:
+        nome = input("Informe o nome a ser alterado: ")
+        lista[0] = nome
+        arquivo = open("cadastro_agenda.txt", "at")
+        arquivo.write(f"{lista[0]}")
     os.system("pause")
 
 
+# Função para gerar / criar um relatório Excel
 def relatorio_excel():
     print("\033[32mGERANDO RELATÓRIO EXCEL...\33[m")
     sleep(1)
@@ -152,13 +170,12 @@ def relatorio_excel():
         df = pd.DataFrame(lista_agenda, columns=["Nome","Telefone","E-mail"])
         df.to_excel("lista_agenda.xlsx")
     except:
-        sleep(0.5)
         print(f"\033[31mERRO! Não foi possível criar o relatório\33[m")
     else:
-        sleep(0.5)
         print("\033[32mRelatório criado com sucesso.\33[m")
 
 
+# Função para enviar e-mail
 def enviar_email():
     os.system("cls")
     titulo("\033[32mENVIAR E-MAIL\33[m".center(60))
@@ -166,14 +183,14 @@ def enviar_email():
     try:
         outlook = win32.Dispatch('outlook.application')
         email = outlook.CreateItem(0)
-        email.To = "seu_email@email.com"
+        email.To = "rgo_junior@hotmail.com"
         email.Subject = "Cadastro de Agenda"
         email.HTMLBody = """
         <p>Olá,</p>
         
         <p>Segue a lista de agenda cadastrado.</p>  
         """
-        anexo = "C:/Users/Dell/Documents/Eng/Projetos/lista_agenda.xlsx"
+        anexo = "C:/Users/Dell/Documents/Eng/Projetos/cadastro_agenda.txt"
         email.Attachments.Add(anexo)
         email.Save()
         email.Send()
