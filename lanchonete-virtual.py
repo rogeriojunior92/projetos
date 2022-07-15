@@ -2,22 +2,33 @@ import os
 from time import sleep
 
 '''
-PROJETO EM ANDAMENTO....
+Projeto está em andamento...
 '''
-
 
 cardapio = {
     "Lanches": {
-        "100": ["X-Salada", "X-Egg", "X-Burguer", "Hot-dog"],
+        "100": ["X-Salada", 12.90],
+        "101": ["X-Egg", 11.90],
+        "102": ["X-Burguer", 10.90],
+        "103": ["Hot-dog", 6.50]
     },
+
     "Adicional": {
-        "110": ["Salada", "Ovo", "Hamburguer", "Salsicha"],
+        "110": ["Salada", 0.50],
+        "111": ["Ovo", 1.00],
+        "112": ["Hamburguer", 2.00],
+        "113": ["Salsicha", 1.50]
     },
+
     "Bebida": {
-        "120": ["Coca-Cola", "Guaraná", "Pepsi", "Suco"],
+        "120": ["Coca-Cola", 5.90],
+        "121": ["Guaraná", 4.90],
+        "122": ["Pepsi", 4.50],
+        "123": ["Suco", 4.00]
     },
 }
 
+print(cardapio["Adicional"]['110'])
 
 def titulo(txt):
     print("\033[36m-\033[0;0m" *40)
@@ -46,7 +57,7 @@ def resposta():
             break
         print("ERRO! Digite apenas S ou N")
     if resp == "N":
-        print("Saindo da tela")
+        print("Saindo do sub menu itens e/ou bebidas.")
 
 
 def sub_menu_itens():
@@ -100,28 +111,28 @@ def menu():
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
-            print("Você escolheu X-Salada. Deseja algo mais? ")
+            print("Você escolheu X-Salada. Deseja adicionar algum item extra? ")
             resposta()
             sub_menu_itens()
             resposta()
             sub_menu_bebida()
             resposta()
         elif opcao == 2:
-            print("Você escolheu X-Egg. Deseja algo mais? ")
+            print("Você escolheu X-Egg. Deseja adicionar algum item extra? ")
             resposta()
             sub_menu_itens()
             resposta()
             sub_menu_bebida()
             resposta()         
         elif opcao == 3:
-            print("Você escolheu X-Burguer. Deseja algo mais? ")
+            print("Você escolheu X-Burguer. Deseja adicionar algum item extra? ")
             resposta()
             sub_menu_itens()
             resposta()
             sub_menu_bebida()
             resposta()  
         elif opcao == 4:
-            print("Você escolheu  Hot-dog. Deseja algo mais? ")
+            print("Você escolheu  Hot-dog. Deseja adicionar algum item extra? ")
             resposta()
             sub_menu_itens()
             resposta()
