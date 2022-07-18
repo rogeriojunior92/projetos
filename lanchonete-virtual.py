@@ -1,10 +1,6 @@
 import os
 from time import sleep
 
-'''
-Projeto está em andamento...
-'''
-
 cardapio = {
     "Lanches": {
         "100": ["X-Salada", 12.90],
@@ -28,7 +24,6 @@ cardapio = {
     },
 }
 
-print(cardapio["Adicional"]['110'])
 
 def titulo(txt):
     print("\033[36m-\033[0;0m" *40)
@@ -68,13 +63,17 @@ def sub_menu_itens():
 
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
-        print("Você adicionou Salada no seu lanche. Deseja algo mais?")
+        print(f"Você adicionou Salada R$ {cardapio['Adicional']['110'][1]} no seu lanche. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 2:
-        print("Você adicionou Ovo no seu lanche. Deseja algo mais?")
+        print(f"Você adicionou Ovo R$ {cardapio['Adicional']['111'][1]} no seu lanche. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 3:
-        print("Você adicionou Hamburguer no seu lanche. Deseja algo mais?")
+        print(f"Você adicionou Hamburguer R$ {cardapio['Adicional']['112'][1]} no seu lanche. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 4:
-        print("Você adicionou Salsicha no seu lanche. Deseja algo mais?")
+        print(f"Você adicionou Salsicha R$ {cardapio['Adicional']['113'][1]} no seu lanche. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 5:
         menu()
     else:
@@ -89,13 +88,17 @@ def sub_menu_bebida():
 
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
-        print("Você adicionou Coca-Cola. Deseja algo mais?")
+        print(f"Você adicionou Coca-Cola R$ {cardapio['Bebida']['120'][1]}. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 2:
-        print("Você adicionou Guaraná. Deseja algo mais?")
+        print(f"Você adicionou Guaraná R$ {cardapio['Bebida']['121'][1]}. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 3:
-        print("Você adicionou Pepsi. Deseja algo mais?")
+        print(f"Você adicionou Pepsi R$ {cardapio['Bebida']['122'][1]}. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 4:
-        print("Você adicionou Suco. Deseja algo mais?")
+        print(f"Você adicionou Suco R$ {cardapio['Bebida']['123'][1]}. Deseja algo mais?")
+        sleep(0.5)
     elif opcao == 5:
         menu()
     else:
@@ -111,7 +114,7 @@ def menu():
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
-            print("Você escolheu X-Salada. Deseja adicionar algum item extra? ")
+            print(f"Você escolheu X-Salada R$ {cardapio['Lanches']['100'][1]}. Deseja adicionar algum item extra? ")
             resposta()
             sub_menu_itens()
             resposta()
