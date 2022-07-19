@@ -1,7 +1,8 @@
 import os
 from time import sleep
 
-valor_total = totalLanche = totalItem = totalBebida = 0
+lista_total = []
+valor_total = totalLanche = totalItem = totalBebida = 0 
 
 
 cardapio = {
@@ -68,20 +69,20 @@ def cardapio_lanches():
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
         print(f"Você escolheu X-Salada R$ {cardapio['Lanches']['100'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalLanche = totalLanche + cardapio["Lanches"]['100'][1]
-        resposta()
+        totalLanche += cardapio["Lanches"]['100'][1]
+        lista_total.append(totalLanche)
     elif opcao == 2:
         print(f"Você escolheu X-Egg R$ {cardapio['Lanches']['101'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
-        totalLanche = totalLanche + cardapio["Lanches"]['101'][1]
-        resposta()
+        totalLanche += cardapio["Lanches"]['101'][1]
+        lista_total.append(totalLanche)
     elif opcao == 3:
         print(f"Você escolheu X-Burguer R$ {cardapio['Lanches']['103'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
-        totalLanche = totalLanche + cardapio["Lanches"]['102'][1]
-        resposta()
+        totalLanche += cardapio["Lanches"]['102'][1]
+        lista_total.append(totalLanche)
     elif opcao == 4:
         print(f"Você escolheu Hot-dog R$ {cardapio['Lanches']['103'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
-        totalLanche = totalLanche + cardapio["Lanches"]['103'][1]
-        resposta()
+        totalLanche += cardapio["Lanches"]['103'][1]
+        lista_total.append(totalLanche)
     elif opcao == 5:
         sleep(0.5)
         print("\033[32mSaindo do Cardápio de Lanches\33[m")
@@ -100,20 +101,20 @@ def carpadio_itens():
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
         print(f"Você adicionou Salada R$ {cardapio['Adicional']['110'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalItem = totalItem + cardapio["Adicional"]['110'][1]
-        resposta()
+        totalItem += cardapio["Adicional"]['110'][1]
+        lista_total.append(totalItem)
     elif opcao == 2:
         print(f"Você adicionou Ovo R$ {cardapio['Adicional']['111'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalItem = totalItem + cardapio["Adicional"]['111'][1]
-        resposta()
+        totalItem += cardapio["Adicional"]['111'][1]
+        lista_total.append(totalItem)
     elif opcao == 3:
         print(f"Você adicionou Hamburguer R$ {cardapio['Adicional']['112'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalItem = totalItem + cardapio["Adicional"]['112'][1]
-        resposta()
+        totalItem += totalItem + cardapio["Adicional"]['112'][1]
+        lista_total.append(totalItem)
     elif opcao == 4:
         print(f"Você adicionou Salsicha R$ {cardapio['Adicional']['113'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalItem = totalItem + cardapio["Adicional"]['113'][1]
-        resposta()
+        totalItem += totalItem + cardapio["Adicional"]['113'][1]
+        lista_total.append(totalItem)
     elif opcao == 5:
         sleep(0.5)
         print("\033[32mSaindo do Cardápio de Item Extra\33[m")
@@ -132,20 +133,20 @@ def carpadio_bebida():
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
         print(f"Você escolheu Coca-Cola R$ {cardapio['Bebida']['120'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalBebida = totalBebida + cardapio["Bebida"]['120'][1]
-        resposta()
+        totalBebida += cardapio["Bebida"]['120'][1]
+        lista_total.append(totalBebida)
     elif opcao == 2:
         print(f"Você escolheu Guaraná R$ {cardapio['Bebida']['121'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalBebida = totalBebida + cardapio["Bebida"]['121'][1]
-        resposta()
+        totalBebida += cardapio["Bebida"]['121'][1]
+        lista_total.append(totalBebida)
     elif opcao == 3:
         print(f"Você escolheu Pepsi R$ {cardapio['Bebida']['122'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalBebida = totalBebida + cardapio["Bebida"]['122'][1]
-        resposta()
+        totalBebida += cardapio["Bebida"]['122'][1]
+        lista_total.append(totalBebida)
     elif opcao == 4:
         print(f"Você escolheu Suco R$ {cardapio['Bebida']['123'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
-        totalBebida = totalBebida + cardapio["Bebida"]['123'][1]
-        resposta()
+        totalBebida += cardapio["Bebida"]['123'][1]
+        lista_total.append(totalBebida)
     elif opcao == 5:
         sleep(0.5)
         print("\033[32mSaindo do Cardápio de Bebidas\33[m")
@@ -157,10 +158,11 @@ def carpadio_bebida():
 def fechar_pedido():
     os.system("cls")
     titulo("FECHANDO O PEDIDO".center(40))
-    valor_total = totalLanche + totalItem + totalBebida
+    valor_total = sum(lista_total)
     print(f"Valor do Pedido R$ {valor_total:.2f}")
     print("\033[36m-\033[0;0m" *40)
     os.system("pause")
+    print(lista_total)
 
 
 def menu():
