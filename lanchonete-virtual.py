@@ -1,5 +1,6 @@
 import os
 from time import sleep
+from datetime import datetime
 
 '''
 Lista para armazenar os valores do pedido.
@@ -199,6 +200,9 @@ Função para somar o valor total do pedido
 def fechar_pedido():
     os.system("cls")
     titulo("FECHANDO O PEDIDO".center(40))
+    data = datetime.now()
+    data_atual = data.strftime("%d/%m/%Y - %H:%M")
+    print(f"Horário do Pedido: {data_atual}")
     valor_total = sum(lista_total)
     print(f"Valor do Pedido R$ {valor_total:.2f}")
     print("\033[36m-\033[0;0m" *40)
