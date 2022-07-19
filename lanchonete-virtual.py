@@ -85,8 +85,6 @@ def carpadio_completo():
     titulo("CARDÁPIO PRINCIPAL".center(40))
     for c in range(0, len(menu_completo), 2):
         print(f"{menu_completo[c]:.<30} R$ {menu_completo[c+1]:>6.2f}")
-    print("\033[36m-\033[0;0m" *40)
-
 
 '''
 Função para imprimir cardápio lanche
@@ -94,6 +92,7 @@ Função para imprimir cardápio lanche
 def cardapio_lanches():
     totalLanche = 0
     os.system("cls")
+    carpadio_completo()
     titulo("CARDÁPIO DE LANCHES".center(40))
     print("1 - X-Salada\n2 - X-Egg\n3 - X-Burguer\n4 - Hot-dog\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
@@ -129,6 +128,7 @@ Função para imprimir cardápio adicional extra
 def carpadio_itens():
     totalItem = 0
     os.system("cls")
+    carpadio_completo()
     titulo("CARDÁPIO DE ADICIONAL".center(40))
     print("1 - Salada\n2 - Ovo\n3 - Hamburguer\n4 - Salsicha\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
