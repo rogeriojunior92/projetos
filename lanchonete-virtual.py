@@ -5,7 +5,7 @@ lista_total = []
 valor_total = totalLanche = totalItem = totalBebida = 0 
 
 menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog", 6.50, "Salada", 0.50, "Ovo", 1.00, "Hamburguer", 2.00, "Salsicha", 1.50,
-                    "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
+                 "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
 
 cardapio = {
     "Lanches": {
@@ -73,7 +73,6 @@ def cardapio_lanches():
     totalLanche = 0
     os.system("cls")
     titulo("CARDÁPIO DE LANCHES".center(40))
-    print("\033[36m-\033[0;0m" *40)
     print("1 - X-Salada\n2 - X-Egg\n3 - X-Burguer\n4 - Hot-dog\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
@@ -106,7 +105,6 @@ def carpadio_itens():
     totalItem = 0
     os.system("cls")
     titulo("CARDÁPIO DE ADICIONAL".center(40))
-    print("\033[36m-\033[0;0m" *40)
     print("1 - Salada\n2 - Ovo\n3 - Hamburguer\n4 - Salsicha\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
@@ -139,7 +137,6 @@ def carpadio_bebida():
     totalBebida = 0
     os.system("cls")
     titulo("CARDÁPIO DE BEBIDAS".center(40))
-    print("\033[36m-\033[0;0m" *40)
     print("1 - Coca-Cola\n2 - Guaraná\n3 - Pepsi\n4 - Suco\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
