@@ -4,6 +4,8 @@ from time import sleep
 lista_total = []
 valor_total = totalLanche = totalItem = totalBebida = 0 
 
+menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog", 6.50, "Salada", 0.50, "Ovo", 1.00, "Hamburguer", 2.00, "Salsicha", 1.50,
+                    "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
 
 cardapio = {
     "Lanches": {
@@ -59,10 +61,19 @@ def resposta():
         print("\033[32mSaindo do sub menu itens e/ou bebidas.\33[m")
 
 
+def carpadio_completo():
+    os.system("cls")
+    titulo("CARDÁPIO PRINCIPAL".center(40))
+    for c in range(0, len(menu_completo), 2):
+        print(f"{menu_completo[c]:.<30} R$ {menu_completo[c+1]:>6.2f}")
+    print("\033[36m-\033[0;0m" *40)
+
+
 def cardapio_lanches():
     totalLanche = 0
     os.system("cls")
     titulo("CARDÁPIO DE LANCHES".center(40))
+    print("\033[36m-\033[0;0m" *40)
     print("1 - X-Salada\n2 - X-Egg\n3 - X-Burguer\n4 - Hot-dog\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
@@ -94,7 +105,8 @@ def cardapio_lanches():
 def carpadio_itens():
     totalItem = 0
     os.system("cls")
-    titulo("CARDÁPIO DE ITEM EXTRA".center(40))
+    titulo("CARDÁPIO DE ADICIONAL".center(40))
+    print("\033[36m-\033[0;0m" *40)
     print("1 - Salada\n2 - Ovo\n3 - Hamburguer\n4 - Salsicha\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
@@ -126,7 +138,8 @@ def carpadio_itens():
 def carpadio_bebida():
     totalBebida = 0
     os.system("cls")
-    titulo("CARDÁPIO DE BEBIDA".center(40))
+    titulo("CARDÁPIO DE BEBIDAS".center(40))
+    print("\033[36m-\033[0;0m" *40)
     print("1 - Coca-Cola\n2 - Guaraná\n3 - Pepsi\n4 - Suco\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
 
@@ -152,7 +165,7 @@ def carpadio_bebida():
         print("\033[32mSaindo do Cardápio de Bebidas\33[m")
         menu()
     else:
-        print("\033[31mOpção inválida. Digite entre 1 e 5!\33[m")  
+        print("\033[31mOpção inválida. Digite entre 1 e 5!\33[m")
 
 
 def fechar_pedido():
@@ -162,36 +175,37 @@ def fechar_pedido():
     print(f"Valor do Pedido R$ {valor_total:.2f}")
     print("\033[36m-\033[0;0m" *40)
     os.system("pause")
-    print(lista_total)
 
 
 def menu():
     os.system("cls")
     while True:
         titulo("LANCHONETE VIRTUAL PYTHON".center(40))
-        print("1 - Cardápio de Lanches\n2 - Cardápio de Itens Extra\n3 - Cardápio de Bebidas\n4 - Fazer Pedido\n5 - Finalizar Pedido\n6 - Sair")
+        print("1 - Carpádio Completo\n2 - Cardápio de Lanches\n3 - Cardápio de Itens Extra\n4 - Cardápio de Bebidas\n5 - Fazer Pedido\n6 - Finalizar Pedido\n7 - Sair")
         print("\033[36m-\033[0;0m" *40)
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
-            cardapio_lanches()
+            carpadio_completo()
         elif opcao == 2:
-            carpadio_itens()
-        elif opcao == 3:
-            carpadio_bebida()
-        elif opcao == 4:
             cardapio_lanches()
-            resposta()
+        elif opcao == 3:
             carpadio_itens()
-            resposta()
+        elif opcao == 4:
             carpadio_bebida()
         elif opcao == 5:
-            fechar_pedido()
+            cardapio_lanches()
+            resposta()
+            carpadio_itens()
+            resposta()
+            carpadio_bebida()
         elif opcao == 6:
+            fechar_pedido()
+        elif opcao == 7:
             sleep(0.5)
             print("\033[32mSaindo do programa... Agradecemos pela preferência!\33[m")
             break
         else:
-            print("\033[31mOpção inválida. Digite entre 1 e 6!\33[m")
+            print("\033[31mOpção inválida. Digite entre 1 e 7!\33[m")
 
 menu()
