@@ -1,11 +1,8 @@
-import os
-from time import sleep
-
 lista_total = []
 valor_total = totalLanche = totalItem = totalBebida = 0 
 
-menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog", 6.50, "Salada", 0.50, "Ovo", 1.00, "Hamburguer", 2.00, "Salsicha", 1.50,
-                 "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
+menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog", 6.50, "Salada (adicional)", 0.50, "Ovo (adicional)", 1.00, "Hamburguer (adicional)", 2.00,
+                 "Salsicha (adicional)", 1.50, "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
 
 cardapio = {
     "Lanches": {
