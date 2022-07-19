@@ -1,9 +1,21 @@
+import os
+from time import sleep
+
+'''
+Lista para armazenar os valores do pedido.
+'''
 lista_total = []
 valor_total = totalLanche = totalItem = totalBebida = 0 
 
+'''
+Tupla para imprimir o cardápio completo produto x preço
+'''
 menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog", 6.50, "Salada (adicional)", 0.50, "Ovo (adicional)", 1.00, "Hamburguer (adicional)", 2.00,
                  "Salsicha (adicional)", 1.50, "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
 
+'''
+Dicionário cardápio, para auxiliar nas variáveis de lanche x preço
+'''
 cardapio = {
     "Lanches": {
         "100": ["X-Salada", 12.90],
@@ -27,13 +39,18 @@ cardapio = {
     },
 }
 
-
+'''
+Função para criar linha e titulo
+'''
 def titulo(txt):
     print("\033[36m-\033[0;0m" *40)
     print("\033[36m"+txt+"\033[0;0m")
     print("\033[36m-\033[0;0m" *40)
 
 
+'''
+Função para entrada de número inteiro e interrupção do teclado
+'''
 def leiaInt(msg):
     while True:
         try:
@@ -47,7 +64,9 @@ def leiaInt(msg):
         else:
             return num
 
-
+'''
+Função para validar resposta do usuário
+'''
 def resposta():
     while True:
         resp = input("Deseja continuar? [S/N] ").upper()[0]
@@ -58,6 +77,9 @@ def resposta():
         print("\033[32mSaindo do sub menu itens e/ou bebidas.\33[m")
 
 
+'''
+Função para imprimir cardápio
+'''
 def carpadio_completo():
     os.system("cls")
     titulo("CARDÁPIO PRINCIPAL".center(40))
@@ -66,6 +88,9 @@ def carpadio_completo():
     print("\033[36m-\033[0;0m" *40)
 
 
+'''
+Função para imprimir cardápio lanche
+'''
 def cardapio_lanches():
     totalLanche = 0
     os.system("cls")
@@ -98,6 +123,9 @@ def cardapio_lanches():
         print("\033[31mOpção inválida. Digite entre 1 e 5!\33[m")     
 
 
+'''
+Função para imprimir cardápio adicional extra
+'''
 def carpadio_itens():
     totalItem = 0
     os.system("cls")
@@ -130,6 +158,9 @@ def carpadio_itens():
         print("\033[31mOpção inválida. Digite entre 1 e 5!\33[m") 
 
 
+'''
+Função para imprimir cardápio de bebidas
+'''
 def carpadio_bebida():
     totalBebida = 0
     os.system("cls")
@@ -162,6 +193,9 @@ def carpadio_bebida():
         print("\033[31mOpção inválida. Digite entre 1 e 5!\33[m")
 
 
+'''
+Função para somar o valor total do pedido
+'''
 def fechar_pedido():
     os.system("cls")
     titulo("FECHANDO O PEDIDO".center(40))
@@ -171,6 +205,9 @@ def fechar_pedido():
     os.system("pause")
 
 
+'''
+Função que executa todo o processo
+'''
 def menu():
     os.system("cls")
     while True:
