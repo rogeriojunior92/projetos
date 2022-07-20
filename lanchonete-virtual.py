@@ -2,6 +2,9 @@ import os
 from time import sleep
 from datetime import datetime
 
+
+nome = input("Digite o seu nome: ")
+
 '''
 Lista para armazenar os valores do pedido.
 '''
@@ -15,7 +18,7 @@ menu_completo = ("X-Salada", 12.90, "X-Egg", 11.90, "X-Burguer", 10.90, "Hot-dog
                  "Salsicha (adicional)", 1.50, "Coca-Cola", 5.90, "Guaraná", 4.90, "Pepsi", 4.50, "Suco", 4.00)
 
 '''
-Dicionário cardápio, para auxiliar nas variáveis de lanche x preço
+Dicionário cardápio, para auxiliar na chave e valor do pedido.
 '''
 cardapio = {
     "Lanches": {
@@ -100,23 +103,26 @@ def cardapio_lanches():
 
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
+        sleep(0.5)
         print(f"Você escolheu X-Salada R$ {cardapio['Lanches']['100'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
         totalLanche += cardapio["Lanches"]['100'][1]
         lista_total.append(totalLanche)
     elif opcao == 2:
+        sleep(0.5)
         print(f"Você escolheu X-Egg R$ {cardapio['Lanches']['101'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
         totalLanche += cardapio["Lanches"]['101'][1]
         lista_total.append(totalLanche)
     elif opcao == 3:
+        sleep(0.5)
         print(f"Você escolheu X-Burguer R$ {cardapio['Lanches']['103'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
         totalLanche += cardapio["Lanches"]['102'][1]
         lista_total.append(totalLanche)
     elif opcao == 4:
+        sleep(0.5)
         print(f"Você escolheu Hot-dog R$ {cardapio['Lanches']['103'][1]}\nDeseja adicionar algum item extra e/ou bebida? ")
         totalLanche += cardapio["Lanches"]['103'][1]
         lista_total.append(totalLanche)
     elif opcao == 5:
-        sleep(0.5)
         print("\033[32mSaindo do Cardápio de Lanches\33[m")
         menu()
     else:
@@ -136,6 +142,7 @@ def carpadio_itens():
 
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
+        sleep(0.5)
         print(f"Você adicionou Salada R$ {cardapio['Adicional']['110'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
         totalItem += cardapio["Adicional"]['110'][1]
         lista_total.append(totalItem)
@@ -165,6 +172,7 @@ Função para imprimir cardápio de bebidas
 def carpadio_bebida():
     totalBebida = 0
     os.system("cls")
+    carpadio_completo()
     titulo("CARDÁPIO DE BEBIDAS".center(40))
     print("1 - Coca-Cola\n2 - Guaraná\n3 - Pepsi\n4 - Suco\n5 - Sair")
     print("\033[36m-\033[0;0m" *40)
@@ -175,14 +183,17 @@ def carpadio_bebida():
         totalBebida += cardapio["Bebida"]['120'][1]
         lista_total.append(totalBebida)
     elif opcao == 2:
+        sleep(0.5)
         print(f"Você escolheu Guaraná R$ {cardapio['Bebida']['121'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
         totalBebida += cardapio["Bebida"]['121'][1]
         lista_total.append(totalBebida)
     elif opcao == 3:
+        sleep(0.5)
         print(f"Você escolheu Pepsi R$ {cardapio['Bebida']['122'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
         totalBebida += cardapio["Bebida"]['122'][1]
         lista_total.append(totalBebida)
     elif opcao == 4:
+        sleep(0.5)
         print(f"Você escolheu Suco R$ {cardapio['Bebida']['123'][1]}\nDeseja adicionar algum item extra e/ou bebida?")
         totalBebida += cardapio["Bebida"]['123'][1]
         lista_total.append(totalBebida)
@@ -202,6 +213,8 @@ def fechar_pedido():
     titulo("FECHANDO O PEDIDO".center(40))
     data = datetime.now()
     data_atual = data.strftime("%d/%m/%Y - %H:%M")
+    sleep(0.5)
+    print(f"Olá, {nome}!\nSeja bem-vindo a Lanchonete Python")
     print(f"Horário do Pedido: {data_atual}")
     valor_total = sum(lista_total)
     print(f"Valor do Pedido R$ {valor_total:.2f}")
