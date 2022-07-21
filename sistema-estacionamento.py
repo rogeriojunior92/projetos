@@ -9,9 +9,9 @@ limite_vagas = 10
 
     
 def titulo(txt):
-    print("\033[36m-\033[0;0m" *105)
-    print("\033[36m"+txt+"\033[0;0m")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
+    print("\033[1;96m"+txt+"\033[0;0m")
+    print("\033[1;96m-\033[0;0m" *70)
 
 
 def leiaInt(msg):
@@ -34,6 +34,7 @@ def novo_cadastro():
     limite_vagas_veiculos = len(lista_veiculo)
     if limite_vagas_veiculos < limite_vagas:
         
+        print("\033[30m• Favor, preencher os campos abaixo para cadastrar um veículo\33[m")
         data = datetime.now()
         data_atual = data.strftime("%d/%m/%Y - %H:%M")
         marca = input("Marca: ")
@@ -47,19 +48,19 @@ def novo_cadastro():
 
     else:
         sleep(0.5)
-        print(f"\033[31mERRO! Não é possível cadastrar mais véiculos. Limite de {limite_vagas} atingido\33[m")
+        print(f"\033[31mERRO! Não é possível cadastrar mais veículos. Limite de {limite_vagas} vagas atingido\33[m")
     os.system("pause")
     
 
 def imprimir_cadastro():
     os.system("cls")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *105)
     print("ID".center(3), end='')
     print("Marca".center(20), end='')
     print("Modelo".center(20), end='')
     print("Placa".center(20), end='')
     print("Proprietário(a)".center(20), end='')
-    print("Data".center(20))
+    print("Data / Hora".center(20))
 
     for indice_veiculo in list(enumerate(lista_veiculo, start=1)):
 
@@ -72,39 +73,39 @@ def imprimir_cadastro():
         print(str(veiculo[2]).center(20), end='')
         print(str(veiculo[3]).center(20), end='')
         print(str(veiculo[4]).center(20))
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *105)
     os.system("pause")
 
 
 def buscar_cadastro():
     os.system("cls")
     termo = input("Informe a placa do veículo para consultar: ")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
     for placa_veiculo in lista_veiculo:
         marca, modelo, placa, proprietario, data_atual = placa_veiculo
         if placa == termo:
             sleep(0.5)
             print(f"Marca: {marca}\nModelo: {modelo}\nPlaca: {placa}\nProprietário(a): {proprietario}\nData: {data_atual}")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
     os.system("pause")
 
 
 def deletar_cadastro():
     os.system("cls")
     termo = input("Informa a placa do veículo que deseja deletar: ")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
     for placa_veiculo in lista_veiculo:
         marca, modelo, placa, proprietario, data_atual = placa_veiculo
         if placa == termo:
             lista_veiculo.remove((marca, modelo, placa, proprietario, data_atual))
             sleep(0.5)
             print(f"Dados removido com sucesso\nPlaca: {placa}")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
     os.system("pause")
 
 
 def gerar_relatorio():
-    titulo("CRIANDO RELATÓRIO EXCEL".center(105))
+    titulo("CRIANDO RELATÓRIO EXCEL".center(70))
     try:
         df = pd.DataFrame(lista_veiculo, columns=["Marca", "Modelo", "Placa", "Proprietario", "Data"])
         df.to_excel("veiculos.xlsx")
@@ -114,19 +115,19 @@ def gerar_relatorio():
     else:
         sleep(0.5)
         print("\033[32mRelatório criado com sucesso.\33[m")
-    print("\033[36m-\033[0;0m" *105)
+    print("\033[1;96m-\033[0;0m" *70)
 
 
 def menu():
     while True:
-        titulo("SISTEMA DE ESTACIONAMENTO PYTHON".center(105))
-        print("1 - NOVO CADASTRO\n2 - LISTAR CADASTRO\n3 - BUSCAR CADASTRO\n4 - DELETAR CADASTRO\n5 - GERAR RELATÓRIO\n6 - SAIR")
-        print("\033[36m-\033[0;0m" *105)
-        print(f"Ao todo foram cadastrados \033[32m{len(lista_veiculo)}\33[m veículo(s)")
-        print("\033[36m-\033[0;0m" *105)
-        print(f"Limite de vagas \033[32m{limite_vagas}\33[m")
-        print(f"Vagas ocupadas \033[31m{len(lista_veiculo) / limite_vagas * 100}% \33[m")
-        print("\033[36m-\033[0;0m" *105)
+        titulo("SISTEMA DE ESTACIONAMENTO PYTHON".center(70))
+        print("\033[97m1 - NOVO CADASTRO\n2 - LISTAR VEÍCULO\n3 - BUSCAR VEÍCULO\n4 - DELETAR VEÍCULO\n5 - GERAR RELATÓRIO\n6 - SAIR\033[m")
+        print("\033[1;96m-\033[0;0m" *70)
+        print(f"\033[97mAo todo foram cadastrados \033[32m{len(lista_veiculo)}\33[m veículo(s)")
+        print("\033[1;96m-\033[0;0m" *70)
+        print(f"\033[97mLimite de vagas \033[32m{limite_vagas}\33[m")
+        print(f"\033[97mTotal de vagas ocupadas \033[31m{len(lista_veiculo) / limite_vagas * 100}% \33[m")
+        print("\033[1;96m-\033[0;0m" *70)
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
