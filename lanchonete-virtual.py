@@ -48,7 +48,7 @@ Função para criar linha e titulo
 '''
 def titulo(txt):
     print("\033[36m-\033[0;0m" *40)
-    print("\033[36m"+txt+"\033[0;0m")
+    print("\033[1;46m"+txt+"\033[1;0m")
     print("\033[36m-\033[0;0m" *40)
 
 
