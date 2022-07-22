@@ -1,9 +1,13 @@
-from datetime import datetime
+from datetime import date, datetime
 import os
+
+data = datetime.now()
+data_atual = data.strftime("%d/%m/%Y %H:%M")
 
 '''
 Sistema de Oftalmologia em andamento
 '''
+preco_exames = ("Tomografia de Coerência Óptica", 1000, "Retinografia", 800, "Topografia", 900, "Paquinetrua", 700)
 
 lista_consulta = []
 valor_exame = []
@@ -53,8 +57,6 @@ def novo_arquivo():
 
 
 def novo_cadastro():
-    data = datetime.now()
-    data_atual = data.strftime("%d/%m/%Y %H:%M")
     nome = input("Nome: ")
     data_nasc = input("Data de Nascimento: ")
     cpf = input("CPF: ")
@@ -65,6 +67,9 @@ def novo_cadastro():
 def lista_exames():
     os.system("cls")
     titulo("LISTA DE EXAMES".center(85))
+    for c in range(0, len(preco_exames), 2):
+        print(f"\033[1;97m{preco_exames[c]:.<45} R$ {preco_exames[c+1]:>6.2f}\033[1;0m")
+    print("\033[36m-\033[0;0m" *85)
     print("\033[1;97m1 - Tomografia de Coerência Óptica\n2 - Retinografia\n3 - Topografia\n4 - Paquinetrua\n5 - Sair\033[1;0m")
     print("\033[36m-\033[0;0m" *85)
 
@@ -143,7 +148,11 @@ def deletar_cadastro():
 
 def valor_consulta():
     os.system("cls")
-    pass
+    titulo("VALOR DA CONSULTA".center(85))
+    print(f"Registro da Saída: {data_atual}")
+    total = sum(valor_exame)
+    print(f"Paciente {nome_paciente}, valor da consulta R$ {total:.2f}")
+    print("\033[36m-\033[0;0m" *85)
     os.system("pause")
 
 
