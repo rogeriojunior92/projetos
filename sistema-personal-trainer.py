@@ -4,6 +4,7 @@ from time import sleep
 
 lista_aluno = []
 adicionar_preco = []
+faturamento_mensal = []
 
 lista_preco = ("1x semana", 95.00, "2x semana", 95.00, "3x semana", 90.00,
                 "Trismestral", 85.00, "Semestral", 80.00, "Anual (consultar)", 00.00)
@@ -66,42 +67,50 @@ def tabela_preco():
 def menu_preco():
     totalPreco = 0
     print("\033[1;95m-\033[0;0m" *60)
-    print("[1] 1x semana\n[2] 2x semana\n[3] 3x semana\n[4] Trismestral\n[5] Semestral\n[6] Anual (consultar]\n[7] Sair")
+    print("[1] 1x semana\n[2] 2x semana\n[3] 3x semana\n[4] Trismestral\n[5] Semestral\n[6] Anual (consultar valores)\n[7] Sair")
     print("\033[1;95m-\033[0;0m" *60)
 
     opcao = leiaInt("Digite a sua opção / plano: ")
     if opcao == 1:
         print("Você escolheu o plano 1x semana \033[32mR$ 95.00\33[m")
-        print("Mensal \033[32mR$ 380.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["100"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento_mensal.append(faturamento)
     elif opcao == 2:
         print("Você escolheu o plano 2x semana \033[32mR$ 190.00\33[m")
-        print("Mensal \033[32mR$ 760.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["101"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento_mensal.append(faturamento)
     elif opcao == 3:
         print("Você escolheu o plano 3x semana \033[32mR$ 270.00\33[m")
-        print("Mensal \033[32mR$ 1080.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["102"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento_mensal.append(faturamento)
     elif opcao == 4:
         print("Você escolheu o plano Trimestral \033[32mR$ 00.00\33[m")
-        print("Mensal \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["103"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento_mensal.append(faturamento)
     elif opcao == 5:
         print("Você escolheu o plano Semestral \033[32mR$ 00.00\33[m")
-        print("Mensal \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["104"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento_mensal.append(faturamento)
     elif opcao == 6:
         print("Você escolheu o plano Anual (consultar) \033[32mR$ 00.00\33[m")
-        print("Mensal \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["105"][1]
+        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
-    else:
+        faturamento_mensal.append(faturamento)
+    elif opcao == 7:
         print("\033[32mSaindo da tabela de preços\33[m")
+    else:
+        print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
 
 
 def cadastrar_aluno():
@@ -116,6 +125,7 @@ def cadastrar_aluno():
 
 
 def listar_aluno():
+    os.system("cls")
     titulo("LISTA DE ALUNO(A) CADASTRADO".center(60))
     print("ID".center(3), end='')
     print("Nome".center(20), end='')
@@ -163,11 +173,12 @@ def deletar_aluno():
 
 def fechar_plano():
     cadastrar_aluno()
-    titulo("FECHAR PLANO".center(60))
+    titulo("FECHAR PLANO DO ALUNO(A)".center(60))
     valor_total = sum(adicionar_preco)
     print(f"Registro: {data_atual}")
     sleep(0.5)
     print(f"Valor total \033[32mR$ {valor_total:.2f}\33[m")
+    print(f"Mensalidade Total R$ \033[32m{(valor_total * 4):.2f}\33[m")
     print("\033[1;95m-\033[0;0m" *60)
 
 
@@ -175,29 +186,29 @@ def menu():
     os.system("cls")
     while True:
         titulo("SISTEMA PERSONAL TRAINER".center(60))
-        print("\033[1;97m1 - Listar Aluno\n2 - Buscar Aluno\n3 - Deletar Aluno\n4 - Fechar Plano\n5 - Sair\033[0;0m")
+        print("\033[1;97m1 - Fechar Plano\n2 - Listar Aluno\n3 - Buscar Aluno\n4 - Deletar Aluno\n5 - Sair\033[0;0m")
         print("\033[1;95m-\033[0;0m" *60)
         print(f"Ao todo foram cadastrado(s) \033[32m{len(lista_aluno)}\33[m aluno(as)")
+        print(f"Faturamento \033[32mR$ {sum(faturamento_mensal):.2f}\33[m")
         print("\033[1;95m-\033[0;0m" *60)
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
-            listar_aluno()
-        elif opcao == 2:
-            buscar_aluno()
-        elif opcao == 3:
-            deletar_aluno()
-        elif opcao == 4:
             tabela_preco()
             menu_preco()
             fechar_plano()
             resposta()
+        elif opcao == 2:
+            listar_aluno()
+        elif opcao == 3:
+            buscar_aluno()
+        elif opcao == 4:
+            deletar_aluno()
         elif opcao == 5:
             print("\033[32mSaindo do programa... Agradeço pela preferência\33[m")
             break
         else:
             print("\033[31mOpção inválida. Digite entre 1 e 5\33[m")
     os.system("pause")
-
 
 menu()
