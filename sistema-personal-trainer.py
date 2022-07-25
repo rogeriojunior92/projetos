@@ -42,9 +42,9 @@ data_atual = data.strftime("%d/%m/%Y %H:%M")
 
 # Função para criar linha e texto
 def titulo(txt):
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     print("\033[1;44m"+txt+"\033[1;0m")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
 
 
 # Função para ler apenas número inteiro e interrupção do teclado pelo usuário
@@ -76,9 +76,9 @@ def resposta():
 # Função que cria uma tabela de quantidade de semanas x preço
 def tabela_preco():
     os.system("cls")
-    titulo("TABELA DE PREÇOS".center(60))
+    titulo("TABELA DE PREÇOS".center(80))
     for c in range(0, len(lista_preco), 2):
-        print(f"{lista_preco[c]:.<30} R$ {lista_preco[c+1]:>6.2f}")
+        print(f"{lista_preco[c]:.<30} R$ {lista_preco[c+1]:>6.2f}".center(80))
 
 
 # Função que cria um sub menu com condições de acordo com a opção selecionada
@@ -86,9 +86,9 @@ def tabela_preco():
 # Armazena o fatuamento na lista faturamento_mensal
 def menu_preco():
     totalPreco = 0
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     print("[1] 1x semana\n[2] 2x semana\n[3] 3x semana\n[4] Trismestral\n[5] Semestral\n[6] Anual (consultar valores)\n[7] Sair")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
 
     opcao = leiaInt("Digite a sua opção / plano: ")
     if opcao == 1:
@@ -135,7 +135,7 @@ def menu_preco():
 
 # Função para cadastrar um novo aluno(a)
 def cadastrar_aluno():
-    titulo("CADASTRO DE ALUNO(A)".center(60))
+    titulo("CADASTRO DE ALUNO(A)".center(80))
     nome = input("Nome: ")
     idade = input("Idade: ")
     cpf = input("CPF: ")
@@ -148,11 +148,12 @@ def cadastrar_aluno():
 # Função para listar / imprimir aluno(a) cadastrado
 def listar_aluno():
     os.system("cls")
-    titulo("LISTA DE ALUNO(A) CADASTRADO".center(60))
+    titulo("LISTA DE ALUNO(A) CADASTRADO".center(80))
     print("ID".center(3), end='')
     print("Nome".center(20), end='')
     print("Idade".center(20), end='')
-    print("CPF".center(20))
+    print("CPF".center(20), end='')
+    print("Registro".center(20))
     
     for indice_aluno in list(enumerate(lista_aluno, start=1)):
 
@@ -162,9 +163,10 @@ def listar_aluno():
         print(str(indice).center(3), end='')
         print(str(aluno[0]).center(20), end='')
         print(str(aluno[1]).center(20), end='')
-        print(str(aluno[2]).center(20))
+        print(str(aluno[2]).center(20), end='')
+        print(str(aluno[3]).center(20))
 
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     os.system("pause")
 
 
@@ -172,12 +174,12 @@ def listar_aluno():
 def buscar_aluno():
     os.system("cls")
     termo = input("Informe o CPF do aluno(a) para buscar: ")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     for cadastro_aluno in lista_aluno:
         nome, idade, cpf, data_atual = cadastro_aluno
         if cpf == termo:
             print(f"Nome: {nome}\nIdade: {idade}\nCPF: {cpf}\nRegistro: {data_atual}")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     os.system("pause")
 
 
@@ -185,13 +187,13 @@ def buscar_aluno():
 def deletar_aluno():
     os.system("cls")
     termo = input("Informe o CPF do aluno(a) que deseja remover: ")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     for cadastro_aluno in lista_aluno:
         nome, idade, cpf, data_atual = cadastro_aluno
         if cpf == termo:
             lista_aluno.remove((nome, idade, cpf, data_atual))
             print(f"CPF {cpf} removido\nData/hora: {data_atual}")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
     os.system("pause")
 
 
@@ -200,25 +202,25 @@ def deletar_aluno():
 # Efetua o faturamento mensal através da variável valor_total
 def fechar_plano():
     cadastrar_aluno()
-    titulo("FECHAR PLANO DO ALUNO(A)".center(60))
+    titulo("FECHAR PLANO DO ALUNO(A)".center(80))
     valor_total = sum(adicionar_preco)
     print(f"Registro: {data_atual}")
     sleep(0.5)
     print(f"Valor do plano \033[32mR$ {valor_total:.2f}\33[m")
     print(f"Mensalidade Total R$ \033[32m{(valor_total * 4):.2f}\33[m")
-    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *80)
 
 
 # Função principal que executa todo processo
 def menu():
     os.system("cls")
     while True:
-        titulo("SISTEMA PERSONAL TRAINER".center(60))
+        titulo("SISTEMA PERSONAL TRAINER".center(80))
         print("\033[1;97m1 - Fechar Plano\n2 - Listar Aluno\n3 - Buscar Aluno\n4 - Deletar Aluno\n5 - Sair\033[0;0m")
-        print("\033[1;94m-\033[0;0m" *60)
+        print("\033[1;94m-\033[0;0m" *80)
         print(f"Ao todo foram cadastrado(s) \033[32m{len(lista_aluno)}\33[m aluno(as)")
         print(f"Faturamento \033[32mR$ {sum(faturamento_mensal):.2f}\33[m")
-        print("\033[1;94m-\033[0;0m" *60)
+        print("\033[1;94m-\033[0;0m" *80)
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
