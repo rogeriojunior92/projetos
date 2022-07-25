@@ -2,13 +2,26 @@ from datetime import date, datetime
 import os
 from time import sleep
 
-lista_aluno = []
-adicionar_preco = []
-faturamento_mensal = []
+'''
+Sistema de controle personal trainer, o objetivo do script:
+1. Mostrar a quantidade de treino x preço
+2. Cadastrar aluno(a) de acordo com o seu objetivo de treino
+3. Listar aluno(a) cadastrado
+4. Consultar o aluno(a) cadastrado pelo CPF
+5. Deletar aluno(a) cadastrado pelo CPF
+6. Informar a quantidade de aluno(a) cadastrado(s)
+7. Mostrar o Faturamento Mensal
+'''
 
+lista_aluno = [] # Armazena o cadastro dos aluno(a)
+adicionar_preco = [] # Armazena o preço
+faturamento_mensal = [] # Armazenal o faturamento mensal
+
+# Tupla para criar uma tabela de quantidade de semanas x preço
 lista_preco = ("1x semana", 95.00, "2x semana", 95.00, "3x semana", 90.00,
                 "Trismestral", 85.00, "Semestral", 80.00, "Anual (consultar)", 00.00)
 
+# Dicionário para auxiliar na escolha quantidade de aulas x preço
 menu_tabela_preco = {
     "tabela": {
         "100": ["1x semana", 95.00],
@@ -27,12 +40,14 @@ data = datetime.now()
 data_atual = data.strftime("%d/%m/%Y %H:%M")
 
 
+# Função para criar linha e texto
 def titulo(txt):
-    print("\033[1;95m-\033[0;0m" *60)
-    print("\033[1;45m"+txt+"\033[1;0m")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
+    print("\033[1;44m"+txt+"\033[1;0m")
+    print("\033[1;94m-\033[0;0m" *60)
 
 
+# Função para ler apenas número inteiro e interrupção do teclado pelo usuário
 def leiaInt(msg):
     while True:
         try:
@@ -47,6 +62,7 @@ def leiaInt(msg):
             return num
 
 
+# Função, onde pergunta se o usuário quer continuar com o programa
 def resposta():
     while True:
         resp = input("Quer continuar? [S/N] ").upper()[0]
@@ -57,6 +73,7 @@ def resposta():
         print("\033[32mSaindo...\33[m")
 
 
+# Função que cria uma tabela de quantidade de semanas x preço
 def tabela_preco():
     os.system("cls")
     titulo("TABELA DE PREÇOS".center(60))
@@ -64,48 +81,51 @@ def tabela_preco():
         print(f"{lista_preco[c]:.<30} R$ {lista_preco[c+1]:>6.2f}")
 
 
+# Função que cria um sub menu com condições de acordo com a opção selecionada
+# Armazena os valores na lista adicionar_preco
+# Armazena o fatuamento na lista faturamento_mensal
 def menu_preco():
     totalPreco = 0
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     print("[1] 1x semana\n[2] 2x semana\n[3] 3x semana\n[4] Trismestral\n[5] Semestral\n[6] Anual (consultar valores)\n[7] Sair")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
 
     opcao = leiaInt("Digite a sua opção / plano: ")
     if opcao == 1:
         print("Você escolheu o plano 1x semana \033[32mR$ 95.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["100"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 2:
         print("Você escolheu o plano 2x semana \033[32mR$ 190.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["101"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 3:
         print("Você escolheu o plano 3x semana \033[32mR$ 270.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["102"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 4:
         print("Você escolheu o plano Trimestral \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["103"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 5:
         print("Você escolheu o plano Semestral \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["104"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 6:
         print("Você escolheu o plano Anual (consultar) \033[32mR$ 00.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["105"][1]
-        faturamento = totalPreco * 4
         adicionar_preco.append(totalPreco)
+        faturamento = totalPreco * 4
         faturamento_mensal.append(faturamento)
     elif opcao == 7:
         print("\033[32mSaindo da tabela de preços\33[m")
@@ -113,6 +133,7 @@ def menu_preco():
         print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
 
 
+# Função para cadastrar um novo aluno(a)
 def cadastrar_aluno():
     titulo("CADASTRO DE ALUNO(A)".center(60))
     nome = input("Nome: ")
@@ -124,6 +145,7 @@ def cadastrar_aluno():
     print("\033[32mAluno(a) cadastro com sucesso\33[m")
 
 
+# Função para listar / imprimir aluno(a) cadastrado
 def listar_aluno():
     os.system("cls")
     titulo("LISTA DE ALUNO(A) CADASTRADO".center(60))
@@ -142,55 +164,61 @@ def listar_aluno():
         print(str(aluno[1]).center(20), end='')
         print(str(aluno[2]).center(20))
 
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     os.system("pause")
 
 
+# Função para buscar aluno(a) cadastrado pelo CPF
 def buscar_aluno():
     os.system("cls")
     termo = input("Informe o CPF do aluno(a) para buscar: ")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     for cadastro_aluno in lista_aluno:
         nome, idade, cpf, data_atual = cadastro_aluno
         if cpf == termo:
             print(f"Nome: {nome}\nIdade: {idade}\nCPF: {cpf}\nRegistro: {data_atual}")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     os.system("pause")
 
 
+# Função para deletar aluno(a) cadastrado pelo CPF
 def deletar_aluno():
     os.system("cls")
     termo = input("Informe o CPF do aluno(a) que deseja remover: ")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     for cadastro_aluno in lista_aluno:
         nome, idade, cpf, data_atual = cadastro_aluno
         if cpf == termo:
             lista_aluno.remove((nome, idade, cpf, data_atual))
             print(f"CPF {cpf} removido\nData/hora: {data_atual}")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
     os.system("pause")
 
 
+# Função para fechamento do plano selecionado
+# Efetua o somatório total através da lista adicionar_preco
+# Efetua o faturamento mensal através da variável valor_total
 def fechar_plano():
     cadastrar_aluno()
     titulo("FECHAR PLANO DO ALUNO(A)".center(60))
     valor_total = sum(adicionar_preco)
     print(f"Registro: {data_atual}")
     sleep(0.5)
-    print(f"Valor total \033[32mR$ {valor_total:.2f}\33[m")
+    print(f"Valor do plano \033[32mR$ {valor_total:.2f}\33[m")
     print(f"Mensalidade Total R$ \033[32m{(valor_total * 4):.2f}\33[m")
-    print("\033[1;95m-\033[0;0m" *60)
+    print("\033[1;94m-\033[0;0m" *60)
 
 
+# Função principal que executa todo processo
 def menu():
     os.system("cls")
     while True:
         titulo("SISTEMA PERSONAL TRAINER".center(60))
         print("\033[1;97m1 - Fechar Plano\n2 - Listar Aluno\n3 - Buscar Aluno\n4 - Deletar Aluno\n5 - Sair\033[0;0m")
-        print("\033[1;95m-\033[0;0m" *60)
+        print("\033[1;94m-\033[0;0m" *60)
         print(f"Ao todo foram cadastrado(s) \033[32m{len(lista_aluno)}\33[m aluno(as)")
         print(f"Faturamento \033[32mR$ {sum(faturamento_mensal):.2f}\33[m")
-        print("\033[1;95m-\033[0;0m" *60)
+        print("\033[1;94m-\033[0;0m" *60)
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
