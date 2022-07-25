@@ -174,7 +174,7 @@ def fechar_plano():
 def menu():
     os.system("cls")
     while True:
-        titulo("PERSONAL TRAINER BEATRIZ".center(60))
+        titulo("SISTEMA PERSONAL TRAINER".center(60))
         print("\033[1;97m1 - Listar Aluno\n2 - Buscar Aluno\n3 - Deletar Aluno\n4 - Fechar Plano\n5 - Sair\033[0;0m")
         print("\033[1;95m-\033[0;0m" *60)
         print(f"Ao todo foram cadastrado(s) \033[32m{len(lista_aluno)}\33[m aluno(as)")
