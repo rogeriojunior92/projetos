@@ -47,6 +47,7 @@ def resposta():
 
 
 def novo_arquivo():
+    os.system("cls")
     try:
         with open("consulta_oftalmologia.txt", "wt+") as arquivo:
             arquivo.close()
@@ -54,14 +55,18 @@ def novo_arquivo():
         print("\033[31mOcorreu um erro na criação do arquivo\33[m")
     else:
         print("\033[32mArquivo criado com sucesso\33[m")
+    os.system("pause")
 
 
 def novo_cadastro():
+    os.system("cls")
     nome = input("Nome: ")
     data_nasc = input("Data de Nascimento: ")
     cpf = input("CPF: ")
 
     lista_consulta.append((nome, data_nasc, cpf, data_atual))
+
+    os.system("pause")
 
 
 def lista_exames():
@@ -157,6 +162,7 @@ def valor_consulta():
 
 
 def menu():
+    os.system("cls")
     while True:
         titulo("SISTEMA DE OFTALMOLOGIA".center(85))
         print("\033[1;97m1 - Lista de Exames\n2 - Novo Arquivo\n3 - Listar Cadastrado\n4 - Buscar Cadastro\n5 - Deletar Cadastro\n6 - Valor da Consulta\n7 - Sair\033[1;0m")
@@ -182,5 +188,6 @@ def menu():
             break
         else:
             print("\033[31mOpção inválida. Digite entre 1 e 6\33[m")
+    os.system("pause")
 
 menu()
