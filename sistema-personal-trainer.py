@@ -13,9 +13,14 @@ Sistema de controle personal trainer, o objetivo do script:
 7. Mostrar o Faturamento Mensal
 '''
 
+totalPreco = 0
+
+data = datetime.now()
+data_atual = data.strftime("%d/%m/%Y %H:%M")
+
 lista_aluno = [] # Armazena o cadastro dos aluno(a)
-adicionar_preco = [] # Armazena o preço
-faturamento_mensal = [] # Armazenal o faturamento mensal
+adicionar_preco = [] # Armazena o preço de acordo com a quantidade de aulas escolhida
+faturamento_mensal = [] # Armazena o faturamento mensal
 
 # Tupla para criar uma tabela de quantidade de semanas x preço
 lista_preco = ("1x semana", 95.00, "2x semana", 95.00, "3x semana", 90.00,
@@ -33,12 +38,6 @@ menu_tabela_preco = {
     }
     
 }
-
-preco = totalPreco = 0
-
-data = datetime.now()
-data_atual = data.strftime("%d/%m/%Y %H:%M")
-
 
 # Função para criar linha e texto
 def titulo(txt):
@@ -71,6 +70,7 @@ def resposta():
         print("ERRO! Digite apenas S ou N")
     if resp == "N":
         print("\033[32mSaindo...\33[m")
+    os.system("cls")
 
 
 # Função que cria uma tabela de quantidade de semanas x preço
@@ -85,7 +85,7 @@ def tabela_preco():
 # Armazena os valores na lista adicionar_preco
 # Armazena o fatuamento na lista faturamento_mensal
 def menu_preco():
-    totalPreco = 0
+    totalPreco = 0 # Variável totalPreco é utilizado como referência para adicionar +1 de acordo com o chave x valor do dicionário
     print("\033[1;94m-\033[0;0m" *80)
     print("[1] 1x semana\n[2] 2x semana\n[3] 3x semana\n[4] Trismestral\n[5] Semestral\n[6] Anual (consultar valores)\n[7] Sair")
     print("\033[1;94m-\033[0;0m" *80)
@@ -93,10 +93,10 @@ def menu_preco():
     opcao = leiaInt("Digite a sua opção / plano: ")
     if opcao == 1:
         print("Você escolheu o plano 1x semana \033[32mR$ 95.00\33[m")
-        totalPreco += menu_tabela_preco["tabela"]["100"][1]
-        adicionar_preco.append(totalPreco)
-        faturamento = totalPreco * 4
-        faturamento_mensal.append(faturamento)
+        totalPreco += menu_tabela_preco["tabela"]["100"][1] # Dicionário menu_tabela_preco está sendo utilizado como referência para cada qtde de aula x preço (chave x valor)
+        adicionar_preco.append(totalPreco) # Adiciona o valor da variável totalPreco na lista adicionar_preco
+        faturamento = totalPreco * 4 # Variável faturamento é utilizado como referência para quadriplicar o valor da variável totalPreco
+        faturamento_mensal.append(faturamento) # Adiciona o valor da variável totalPreco na lista faturamento_mensal
     elif opcao == 2:
         print("Você escolheu o plano 2x semana \033[32mR$ 190.00\33[m")
         totalPreco += menu_tabela_preco["tabela"]["101"][1]
@@ -136,11 +136,11 @@ def menu_preco():
 # Função para cadastrar um novo aluno(a)
 def cadastrar_aluno():
     titulo("CADASTRO DE ALUNO(A)".center(80))
-    nome = input("Nome: ")
+    nome = input("Nome: ").title()
     idade = input("Idade: ")
     cpf = input("CPF: ")
 
-    lista_aluno.append((nome, idade, cpf, data_atual))
+    lista_aluno.append((nome, idade, cpf, data_atual, sum(adicionar_preco)))
     sleep(0.5)
     print("\033[32mAluno(a) cadastro com sucesso\33[m")
 
@@ -153,7 +153,8 @@ def listar_aluno():
     print("Nome".center(20), end='')
     print("Idade".center(20), end='')
     print("CPF".center(20), end='')
-    print("Registro".center(20))
+    print("Registro".center(20), end='')
+    print("Plano".center(20))
     
     for indice_aluno in list(enumerate(lista_aluno, start=1)):
 
@@ -164,7 +165,8 @@ def listar_aluno():
         print(str(aluno[0]).center(20), end='')
         print(str(aluno[1]).center(20), end='')
         print(str(aluno[2]).center(20), end='')
-        print(str(aluno[3]).center(20))
+        print(str(aluno[3]).center(20), end='')
+        print(str(aluno[4]).center(20))
 
     print("\033[1;94m-\033[0;0m" *80)
     os.system("pause")
@@ -207,7 +209,7 @@ def fechar_plano():
     print(f"Registro: {data_atual}")
     sleep(0.5)
     print(f"Valor do plano \033[32mR$ {valor_total:.2f}\33[m")
-    print(f"Mensalidade Total R$ \033[32m{(valor_total * 4):.2f}\33[m")
+    print(f"Mensalidade R$ \033[32m{(valor_total * 4):.2f}\33[m")
     print("\033[1;94m-\033[0;0m" *80)
 
 
