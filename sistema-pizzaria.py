@@ -4,10 +4,10 @@ from time import sleep
 
 lista_carpadio = []
 
+
 menu_completo = ("Calabresa", 25.00, "Mussarela", 22.00, "Portguesa", 28.00, "Atum", 30.00, "Bacon", 26.00,
                 "Coca-Cola", 9.00, "Pepsi", 8.00, "Guaraná", 7.00, "Água Mineral", 4.50, "Suco", 5.00, "Energetico", 7.00, "Caipirinha", 12.00, "Cerveja", 6.50,
                  "Pudim", 10.00, "Petit Gateau", 18.00, "Açaí", 12.00, "Romeu e Julieta", 15.00, "Chocolate com Nozes", 9.00, "Banana Split", 13.00)
-
 
 carpadio = {
     "Pizza": {
@@ -42,14 +42,14 @@ carpadio = {
 
 # Função para criar linha e texto
 def titulo(txt):
-    print("\033[1;96m-\033[0;0m" *50)
-    print("\033[1;46m"+txt+"\033[1;0m")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;94m-\033[0;0m" *50)
+    print("\033[1;44m"+txt+"\033[1;0m")
+    print("\033[1;94m-\033[0;0m" *50)
 
 
 def resposta():
     while True:
-        resp = input("Quer algo mais? [S/N] ").upper()[0]
+        resp = input("\033[32mQuer algo mais? [S/N]\33[m ").upper()[0]
         if resp in "SN":
             break
         print("ERRO! Digite apenas S ou N")
@@ -85,8 +85,8 @@ def menu_pizza():
     totalPizza = 0
     cardapio_completo()
     titulo("CARDÁPIO DE PIZZA".center(50))
-    print("1 - Calabresa\n2 - Mussarela\n3 - Portguesa\n4 - Atum\n5 - Bacon\n6 - Sair")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;37m1 - Calabresa\n2 - Mussarela\n3 - Portguesa\n4 - Atum\n5 - Bacon\n6 - Sair\33[m")
+    print("\033[1;94m-\033[0;0m" *50)
 
     opcao = leiaInt("Digite a sua opção para escolher a Pizza: ")
     if opcao == 1:
@@ -128,8 +128,8 @@ def menu_bebida():
     totalBebida = 0
     cardapio_completo()
     titulo("CARDÁPIO DE BEBIDAS".center(50))
-    print("1 - Coca-Cola\n2 - Pepsi\n3 - Guaraná\n4 - Água Mineral\n5 - Suco\n6 - Energetico\n7 - Caipirinha\n8 - Cerveja\n9 - Sair")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;37m1 - Coca-Cola\n2 - Pepsi\n3 - Guaraná\n4 - Água Mineral\n5 - Suco\n6 - Energetico\n7 - Caipirinha\n8 - Cerveja\n9 - Sair\33[m")
+    print("\033[1;94m-\033[0;0m" *50)
 
     opcao = leiaInt("Digite a sua opção para escolher a Bebida: ")
     if opcao == 1:
@@ -186,8 +186,8 @@ def menu_sobremesa():
     totalSobremesa = 0
     cardapio_completo()
     titulo("CARDÁPIO DE SOBREMESA".center(50))
-    print("1 - Pudim\n2 - Petit Gateau\n3 - Açaí\n4 - Romeu e Julieta\n5 - Chocolate com Nozes\n6 - Banana Split\n7 - Sair")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;37m1 - Pudim\n2 - Petit Gateau\n3 - Açaí\n4 - Romeu e Julieta\n5 - Chocolate com Nozes\n6 - Banana Split\n7 - Sair\33[m")
+    print("\033[1;94m-\033[0;0m" *50)
 
     opcao = leiaInt("Digite a sua opção para escolher a Sobrenesa: ")
     if opcao == 1:
@@ -239,17 +239,17 @@ def fechar_pedido():
         print(f"R$ {lista:.2f}")
     total = sum(lista_carpadio)
     sleep(0.5)
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;94m-\033[0;0m" *50)
     print(f"Valor R$ {total:.2f}")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;94m-\033[0;0m" *50)
     os.system("pause")
 
 
 def menu():
     os.system("cls")
     titulo("SISTEMA DE PIZZARIA".center(50))
-    print("1 - Abrir Cardápio de Pizza\n2 - Abrir Cardápio de Bebidas\n3 - Abrir Cardápio de Sobremesa\n4 - Fazer Pedido\n5 - Fechar o Pedido\n6 - Sair")
-    print("\033[1;96m-\033[0;0m" *50)
+    print("\033[1;37m1 - Abrir Cardápio de Pizza\n2 - Abrir Cardápio de Bebidas\n3 - Abrir Cardápio de Sobremesa\n4 - Fazer Pedido\n5 - Fechar o Pedido\n6 - Sair\033[0;0m")
+    print("\033[1;94m-\033[0;0m" *50)
 
     opcao = leiaInt("Digite a sua opção: ")
     if opcao == 1:
