@@ -1,8 +1,9 @@
 import pandas as pd
 from faker import Faker
 
+locales = 'pt-BR'
 lista_dados = []
-fake = Faker()
+fake = Faker(locales)
 
 
 # Função para criar linha e texto (título)
@@ -29,12 +30,18 @@ def leiaInt(msg):
 
 # Função que gera dados fakes
 def gerar_dados_faker():
-    for c in range(100):
+    for c in range(1):
         nome = fake.name()
+        data = fake.date()
+        year = fake.year()
         endereco = fake.address()
+        phone = fake.phone_number()
         email = fake.email()
+        job = fake.job()
 
-        lista_dados.append((nome, endereco, email))
+        lista_dados.append((nome, data, year, endereco, phone, email, job))
+        print(lista_dados)
+
     return c
 
 
@@ -42,10 +49,10 @@ def gerar_dados_faker():
 # Também é possível informar a quantidade de relatórios que deseja gerar
 def gerar_relatorio_excel():
     titulo("GERAR RELATÓRIO EXCEL".center(50))
-    relatorios = int(input("Quantos relatórios? "))
+    relatorios = int(input("Deseja gerar quantos relatórios? "))
     for c in range(0, relatorios):
         try:
-            df = pd.DataFrame(lista_dados, columns=["Nome", "Endereco", "E-mail"])
+            df = pd.DataFrame(lista_dados, columns=["Nome", "Data", "Ano", "Endereco", "Telefone", "E-mail", "Cargo"])
             df.to_excel(f"dados_fake_{c+1}.xlsx", index=False)
         except:
             print("\033[31mOcorreu na criação do relatório\33[m")
