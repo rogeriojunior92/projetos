@@ -1,9 +1,11 @@
+import os
 import pandas as pd
+from time import sleep
 from faker import Faker
 
-locales = 'pt-BR'
+locale = 'pt-BR'
 lista_dados = []
-fake = Faker(locales)
+fake = Faker(locale)
 
 
 # Função para criar linha e texto (título)
@@ -30,40 +32,55 @@ def leiaInt(msg):
 
 # Função que gera dados fakes
 def gerar_dados_faker():
-    for c in range(1):
-        nome = fake.name()
-        data = fake.date()
-        year = fake.year()
-        endereco = fake.address()
-        phone = fake.phone_number()
-        email = fake.email()
-        job = fake.job()
+    os.system("cls")
+    titulo("GERADOR DE DADOS FAKES".center(50))
+    try:
+        for c in range(1):
+            nome = fake.name()
+            data = fake.date()
+            ano = fake.year()
+            cidade = fake.city()
+            estado = fake.state()
+            telefone = fake.phone_number()
+            email = fake.email()
+            trabalho = fake.job()
 
-        lista_dados.append((nome, data, year, endereco, phone, email, job))
-        print(lista_dados)
+            lista_dados.append((nome, data, ano, cidade, estado, telefone, email, trabalho))
+            print(lista_dados)
+    except:
+        sleep(0.5)
+        print("\033[31mOcorreu um erro na criação dos Dados Fakes\33[m")
+    else:
+        sleep(0.5)
+        print("\033[32mDados Fakes criado com sucesso\33[m")
+    os.system("pause")
 
     return c
+    
 
-
-# Função para criar relatório excel
-# Também é possível informar a quantidade de relatórios que deseja gerar
+# Função para criar relatório excel com quantidade de relatórios desejado
 def gerar_relatorio_excel():
+    os.system("cls")
     titulo("GERAR RELATÓRIO EXCEL".center(50))
-    relatorios = int(input("Deseja gerar quantos relatórios? "))
+    relatorios = int(input("Deseja gerar quantos relatórios Excel? "))
     for c in range(0, relatorios):
         try:
-            df = pd.DataFrame(lista_dados, columns=["Nome", "Data", "Ano", "Endereco", "Telefone", "E-mail", "Cargo"])
+            df = pd.DataFrame(lista_dados, columns=["nome", "data_nasc", "ano", "cidade", "estado", "sigla", "telefone", "e-mail", "cargo"])
             df.to_excel(f"dados_fake_{c+1}.xlsx", index=False)
         except:
+            sleep(0.5)
             print("\033[31mOcorreu na criação do relatório\33[m")
         else:
+            sleep(0.5)
             print("\033[32mRelatório criado com sucesso\33[m")
+    os.system("pause")
 
 
 # Função principal que executa todo o processo
 def menu():
+    os.system("cls")
     while True:
-        titulo("SISTEMA PARA CRIAR DADOS FAKES".center(50))
+        titulo("SISTEMA DADOS FAKES".center(50))
         print("1 - Criar Dataset\n2 - Gerar Relatório\n3 - Sair")
         print("\033[1;94m-\033[0;0m" *50)
 
