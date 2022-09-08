@@ -2,7 +2,7 @@ import os
 from time import sleep
 
 # Lista com formato de arquivos
-lista_formato = ["xlsx", "csv", "txt", "json", "sql"]
+lista_formato = ["xlsx", "csv", "txt", "json", "sql", "db"]
 
 
 # Função para criar linha e texto
@@ -46,16 +46,17 @@ def criar_arquivo():
     os.system("cls")
     while True:
         titulo("FORMATO DE ARQUIVO".center(50))
-        print("1 - XLSX\n2 - CSV\n3 - TXT\n4 - JSON\n5 - SQL\n6 - Sair")
+        print("1 - XLSX\n2 - CSV\n3 - TXT\n4 - JSON\n5 - SQL\n6 - DB\n7 - Sair")
         print("\033[1;94m-\033[0;0m" *50)
 
         opcao = leiaInt("Digite a opção do arquivo: ")
         if opcao == 1:
+            nome_arquivo = input("Digite o nome do arquivo: ")
             quantos_arquivos = int(input("• Quantos arquivos deseja gerar? "))
             for c in range(0, quantos_arquivos):
                 try:
                     sleep(0.5)
-                    with open(f"novo_arquivo_{c+1}.{lista_formato[0]}", "wt+") as arquivo:
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[0]}", "wt+") as arquivo:
                         arquivo.close()
                 except:
                     sleep(0.5)
@@ -65,11 +66,12 @@ def criar_arquivo():
                     print("\033[32mArquivo criado com sucesso\33[m")
        
         elif opcao == 2:
+            nome_arquivo = input("Digite o nome do arquivo: ")
             quantos_arquivos = int(input("• Quantos arquivos deseja gerar? "))
             for c in range(0, quantos_arquivos):
                 try:
                     sleep(0.5)
-                    with open(f"novo_arquivo_{c+1}.{lista_formato[1]}", "wt+") as arquivo:
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[1]}", "wt+") as arquivo:
                         arquivo.close()
                 except:
                     sleep(0.5)
@@ -79,11 +81,12 @@ def criar_arquivo():
                     print("\033[32mArquivo criado com sucesso\33[m")
         
         elif opcao == 3:
+            nome_arquivo = input("Digite o nome do arquivo: ")
             quantos_arquivos = int(input("• Quantos arquivos deseja gerar? "))
             for c in range(0, quantos_arquivos):
                 try:
                     sleep(0.5)
-                    with open(f"novo_arquivo_{c+1}.{lista_formato[2]}", "wt+") as arquivo:
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[2]}", "wt+") as arquivo:
                         arquivo.close()
                 except:
                     sleep(0.5)
@@ -97,7 +100,7 @@ def criar_arquivo():
             for c in range(0, quantos_arquivos):
                 try:
                     sleep(0.5)
-                    with open(f"novo_arquivo_{c+1}.{lista_formato[3]}", "wt+") as arquivo:
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[3]}", "wt+") as arquivo:
                         arquivo.close()
                 except:
                     sleep(0.5)
@@ -107,11 +110,12 @@ def criar_arquivo():
                     print("\033[32mArquivo criado com sucesso\33[m")
         
         elif opcao == 5:
+            nome_arquivo = input("Digite o nome do arquivo: ")
             quantos_arquivos = int(input("• Quantos arquivos deseja gerar? "))
             for c in range(0, quantos_arquivos):
                 try:
                     sleep(0.5)
-                    with open(f"novo_arquivo_{c+1}.{lista_formato[4]}", "wt+") as arquivo:
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[4]}", "wt+") as arquivo:
                         arquivo.close()
                 except:
                     sleep(0.5)
@@ -121,6 +125,21 @@ def criar_arquivo():
                     print("\033[32mArquivo criado com sucesso\33[m")
        
         elif opcao == 6:
+            nome_arquivo = input("Digite o nome do arquivo: ")
+            quantos_arquivos = int(input("• Quantos arquivos deseja gerar? "))
+            for c in range(0, quantos_arquivos):
+                try:
+                    sleep(0.5)
+                    with open(f"{nome_arquivo}_{c+1}.{lista_formato[5]}", "wt+") as arquivo:
+                        arquivo.close()
+                except:
+                    sleep(0.5)
+                    print("\033[31mErro na criação do arquivo\33[m")
+                else:
+                    sleep(0.5)
+                    print("\033[32mArquivo criado com sucesso\33[m")
+                    
+        elif opcao == 7:
             sleep(0.5)
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
