@@ -42,8 +42,10 @@ def novo_arquivo():
         with open("cadastro_funcionario.txt", "wt+") as arquivo:
             arquivo.close()
     except:
+        sleep(0.5)
         print("\033[31mOcorreu um erro na criação do arquivo\33[m")
     else:
+        sleep(0.5)
         print("\033[32mArquivo criado com sucesso\33[m")
     os.system('pause')
 
@@ -55,6 +57,7 @@ def novo_cadastro():
     limite_cadastro_funcionarios = len(lista_cadastro)
     if limite_cadastro_funcionarios < limite_cadastro:
         
+        titulo("MENU - CADASTRO NOVO FUNCIONÁRIO".center(50))
         print(f"Horário de Registro: {data_atual}")
         cadastro['Nome'] = input("Nome: ")
         cadastro['CPF'] = input("CPF: ")
@@ -73,10 +76,13 @@ def novo_cadastro():
             cadastro['Aposentadoria'] = cadastro['Idade'] + 35
     
         lista_cadastro.append(cadastro.copy())
+        sleep(0.5)
         print("\033[32mCadastrado com sucesso\33[m")
     
     else:
+        sleep(0.5)
         print(f"\033[31mERRO! Não é possível cadastrar mais contatos. Limite de {limite_cadastro} atingido\33[m")
+    print("\033[1;94m-\033[0;0m" *50)
     os.system('pause')
 
 
@@ -134,6 +140,7 @@ def deletar_cadastro():
         if cpf == termo:
             sleep(0.5)
             lista_cadastro.remove(lista)
+        sleep(0.5)
         print(f"CPF \033[32m{termo}\33[m removido com sucesso")
     os.system('pause')
 
@@ -149,73 +156,79 @@ def atualizar_cadastro():
         if cpf == termo:
             sleep(0.5)
             print(f"Nome: {lista['Nome']}\nCPF: {lista['CPF']}\nAno Nascimento: {lista['Ano de Nascimento']}\nIdade: {lista['Idade']}\nSalário: {lista['Salário']}\nSexo: {lista['Sexo']}\nCTPS: {lista['CTPS']}\nAposentadoria: {lista['Aposentadoria']}")
-            print("\033[1;94m-\033[0;0m" *50)
 
             while True:
                 titulo("MENU DE ATUALIZAÇÃO CADASTRAL".center(50))
-                print("1 - Nome\n2 - CPF\n3 - Ano de Nascimento\n4 - Idade\n5 - Salário\n6 - Sexo\n7 - CTPS\n8 - Sair")
+                print("1 - Nome\n2 - CPF\n3 - Ano de Nascimento\n4 - Salário\n5 - Sexo\n6 - CTPS\n7 - Sair")
                 print("\033[1;94m-\033[0;0m" *50)
 
                 opcao = leiaInt("Digite a sua opção que deseja alterar: ")
                 if opcao == 1:
                     novo_nome = input("Informe o novo Nome para alteração: ")
                     if novo_nome in lista_cadastro[0]['Nome']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_nome}\33[m na lista")
                     else:
                         lista_cadastro[0]['Nome'] = novo_nome
+                        sleep(0.5)
                         print(f"Nome \033[32m{novo_nome}\33[m alterado com sucesso!")
 
                 elif opcao == 2:
                     novo_cpf = input("Informe o novo CPF para alteração: ")
                     if novo_cpf in lista_cadastro[0]['CPF']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_cpf}\33[m na lista")
                     else:
                         lista_cadastro[0]['CPF'] = novo_cpf
+                        sleep(0.5)
                         print(f"CPF \033[32m{novo_cpf}\33[m alterado com sucesso!")
 
                 elif opcao == 3:
-                    novo_ano_nascimento = input("Informe o novo Ano de Nascimento para alteração: ")
+                    novo_ano_nascimento = int(input("Informe o novo Ano de Nascimento para alteração: "))
                     if novo_ano_nascimento in lista_cadastro[0]['Ano de Nascimento']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_ano_nascimento}\33[m na lista")
                     else:
                         lista_cadastro[0]['Ano de Nascimento'] = novo_ano_nascimento
+                        sleep(0.5)
                         print(f"Ano de Nascimento \033[32m{novo_ano_nascimento}\33[m alterado com sucesso!")
 
                 elif opcao == 4:
-                    nova_idade = input("Informe a nova Idade para alteração: ")
-                    if nova_idade in lista_cadastro[0]['Idade']:
-                        print(f"Nao existe \033[31m{nova_idade}\33[m na lista")
-                    else:
-                        lista_cadastro[0]['Idade'] = nova_idade
-                        print(f"Idade \033[32m{nova_idade}\33[m alterado com sucesso!")
-                
-                elif opcao == 5:
                     novo_salario = float(input("Informe o novo Salário para alteração: R$ "))
                     if novo_salario in lista_cadastro[0]['Salário']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_salario}\33[m na lista")
                     else:
                         lista_cadastro[0]['Salário'] = novo_salario
+                        sleep(0.5)
                         print(f"Novo salário \033[32mR$ {lista_cadastro}\33[m alterado com sucesso!")
 
-                elif opcao == 6:
+                elif opcao == 5:
                     novo_sexo = input("Informe o novo Sexo para alteração: [M/F] ").upper()[0]
                     if novo_sexo in lista_cadastro[0]['Sexo']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_sexo}\33[m na lista")
                     else:
+                        lista_cadastro[0]['Sexo'] = novo_sexo
+                        sleep(0.5)
                         print(f"Sexo \033[32mR$ {novo_sexo}\33[m alterado com sucesso!")
 
-                elif opcao == 7:
+                elif opcao == 6:
                     novo_ctps = input("Informe o novo CTPS para alteração: ")
                     if novo_ctps in lista_cadastro[0]['CTPS']:
+                        sleep(0.5)
                         print(f"Nao existe \033[31m{novo_ctps}\33[m na lista")
                     else:
                         lista_cadastro[0]['CTPS'] = novo_ctps
+                        sleep(0.5)
                         print(f"CTPS \033[32mR$ {novo_ctps}\33[m alterado com sucesso!")
 
-                elif opcao == 8:
+                elif opcao == 7:
+                    sleep(0.5)
                     print("\033[32mSaindo do programa... Até logo!\33[m")
                     break
                 else:
+                    sleep(0.5)
                     print("\033[31mOpção inválida. Digite entre 1 e 9\33[m")
     os.system('pause')
 
@@ -245,9 +258,11 @@ def menu():
         elif opcao == 6:
             atualizar_cadastro()
         elif opcao == 7:
+            sleep(0.5)
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
         else:
+            sleep(0.5)
             print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
 
 menu()
