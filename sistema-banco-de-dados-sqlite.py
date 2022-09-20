@@ -3,6 +3,12 @@ import sqlite3
 from sqlite3 import Error
 from time import sleep
 
+# cursor: É um interador que permite navegar e manipular os registros do banco.
+# execute: Lê e executa comandos SQL puro diretamente no banco.
+# sqlite3.connect(): Para criar uma conexão com o banco de dados.
+# cursor = conn.cursor(): Para executar instruções SQL e buscar resultados de consultas SQL, precisaremos usar um cursor de banco de dados.
+# commit(): É ele que grava de fato as alterações na tabela. Lembrando que uma tabela é alterada com as instruções SQL ``INSERT, UPDATE`` e ``DELETE``.
+# fetchall(): Para buscar todos os registros no banco.
 
 # Diretório onde o banco de dados está criado
 path = "C:/Users/Dell/Documents/SQLite/agenda.db"
@@ -35,14 +41,13 @@ def conexao_banco():
     try:
         # Verifica no diretório se o banco de dados já existe
         if not (os.path.exists(path)):
-            # Conexão ao banco
+            # Conexão sqlite3 com banco de dados
             conn = sqlite3.connect(path)
             print("Banco criado com sucesso!")
     except Error as er:
         sleep(0.5)
         print(f"\033[31mOcorreu um erro na conexão ao banco de dados {er}\33[m")
     else:
-        # Conexão ao banco
         conn = sqlite3.connect(path)
         sleep(0.5)
         print("\033[31mO banco já existe, por isso não pode ser criado!\33[m")
@@ -56,7 +61,7 @@ def criar_tabela():
     os.system("cls")
     titulo("CRIAR TABELA NO BANCO DE DADOS".center(50))
     try:
-        # Conexão ao banco
+        # Conexão sqlite3 com banco de dados
         cursor = sqlite3.connect(path)
         # Criando a tabela
         cursor.executescript("""
@@ -81,7 +86,7 @@ def listar_tabela():
     os.system("cls")
     titulo("LISTAR TABELAS NO BANCO DE DADOS".center(50))
     try:
-        # Conexão ao banco
+        # Conexão sqlite3 com banco de dados
         conn = sqlite3.connect(path)
         # Consulta / listando tabelas existentes no banco
         sql_query = (
@@ -113,7 +118,7 @@ def deletar_tabela():
     os.system("cls")
     titulo("DELETAR TABELA DO BANCO DE DADOS")
     termo = input("Informe o nome da tabela que deseja remover: ")
-    # Conexão ao banco
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     try:
         sql_query = ( f"""DROP TABLE tb_{termo}""")
@@ -128,7 +133,7 @@ def deletar_tabela():
 def novo_registro():
     os.system("cls")
     titulo("NOVO REGISTRO".center(50))
-    # Conexão ao banco
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     
@@ -157,6 +162,7 @@ def novo_registro():
 def imprimir_registro():
     os.system("cls")
     titulo("IMPRIMIR REGISTRO".center(50))
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     sql_query = (
         """SELECT *
@@ -194,7 +200,7 @@ def buscar_registro():
     os.system("cls")
     titulo("BUSCAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para buscar o registro: ")
-    # Conexão ao banco
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     cursor.execute(
@@ -216,7 +222,7 @@ def deletar_registro():
     os.system("cls")
     titulo("DELETAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para deletar o registro: ")
-    # Conexão ao banco
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     cursor.execute(
@@ -235,7 +241,7 @@ def atualizar_registro():
     os.system("cls")
     titulo("ATUALIZAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para atualizar o registro: ")
-    # Conexão ao banco
+    # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     cursor.execute(f"""
