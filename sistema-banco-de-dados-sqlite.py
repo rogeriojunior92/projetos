@@ -3,10 +3,6 @@ import sqlite3
 from sqlite3 import Error
 from time import sleep
 
-lista_tabela = []
-
-#banco_dados = input("Crie um novo banco de dados: ")
-#criar_tabela = input("Criar nova tabela: ")
 
 # Diretório onde o banco de dados está criado
 path = "C:/Users/Dell/Documents/SQLite/agenda.db"
@@ -39,12 +35,14 @@ def conexao_banco():
     try:
         # Verifica no diretório se o banco de dados já existe
         if not (os.path.exists(path)):
+            # Conexão ao banco
             conn = sqlite3.connect(path)
             print("Banco criado com sucesso!")
     except Error as er:
         sleep(0.5)
         print(f"\033[31mOcorreu um erro na conexão ao banco de dados {er}\33[m")
     else:
+        # Conexão ao banco
         conn = sqlite3.connect(path)
         sleep(0.5)
         print("\033[31mO banco já existe, por isso não pode ser criado!\33[m")
@@ -58,7 +56,7 @@ def criar_tabela():
     os.system("cls")
     titulo("CRIAR TABELA NO BANCO DE DADOS".center(50))
     try:
-        # Definindo o cursor (conexão ao banco)
+        # Conexão ao banco
         cursor = sqlite3.connect(path)
         # Criando a tabela
         cursor.executescript("""
@@ -83,7 +81,7 @@ def listar_tabela():
     os.system("cls")
     titulo("LISTAR TABELAS NO BANCO DE DADOS".center(50))
     try:
-        # Definindo a conexão ao banco
+        # Conexão ao banco
         conn = sqlite3.connect(path)
         # Consulta / listando tabelas existentes no banco
         sql_query = (
@@ -110,17 +108,15 @@ def listar_tabela():
         print(f"\033[31mOcorreu um erro na execução da query {er}\33[m")
 
 
+# Função para deletar tabela
 def deletar_tabela():
     os.system("cls")
     titulo("DELETAR TABELA DO BANCO DE DADOS")
     termo = input("Informe o nome da tabela que deseja remover: ")
+    # Conexão ao banco
     conn = sqlite3.connect(path)
     try:
-        sql_query = (
-            f"""
-            DROP TABLE tb_{termo}
-
-        """)
+        sql_query = ( f"""DROP TABLE tb_{termo}""")
         cursor = conn.cursor()
         cursor.execute(sql_query)
         print("\033[32mTabela excluido com sucesso\33[m")
@@ -132,7 +128,7 @@ def deletar_tabela():
 def novo_registro():
     os.system("cls")
     titulo("NOVO REGISTRO".center(50))
-    # Definindo a conexão ao banco
+    # Conexão ao banco
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     
@@ -157,13 +153,14 @@ def novo_registro():
     os.system("pause")
 
 
+# Função para imprimir / listar os dados da tabela
 def imprimir_registro():
     os.system("cls")
     titulo("IMPRIMIR REGISTRO".center(50))
     conn = sqlite3.connect(path)
-    sql_query = ("""
-    SELECT *
-    FROM tb_contatos
+    sql_query = (
+        """SELECT *
+        FROM tb_contatos
     """)
     cursor = conn.cursor()
     cursor.execute(sql_query)
@@ -192,10 +189,12 @@ def imprimir_registro():
     os.system("pause")
 
 
+# Função para buscar registro no banco
 def buscar_registro():
     os.system("cls")
-    titulo("BUSCAR REGISTRO".center(50))
+    titulo("BUSCAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para buscar o registro: ")
+    # Conexão ao banco
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
     cursor.execute(
@@ -204,24 +203,79 @@ def buscar_registro():
         FROM tb_contatos
         WHERE CPF = '{termo}'
     """)
+    print("\033[1;94m-\033[0;0m" *50)
     for agenda_cpf in cursor.fetchall():
         print(f"Nome: {agenda_cpf[1]}\nSobrenome: {agenda_cpf[2]}\nSexo: {agenda_cpf[3]}\nCPF: {agenda_cpf[4]}\nTelefone: {agenda_cpf[5]}\nE-mail: {agenda_cpf[6]}")
+    print("\033[1;94m-\033[0;0m" *50)
     conn.commit()
     os.system("pause")
 
 
+# Função para deletar registro no banco 
 def deletar_registro():
     os.system("cls")
-    titulo("DELETAR REGISTRO".center(50))
+    titulo("DELETAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para deletar o registro: ")
+    # Conexão ao banco
+    conn = sqlite3.connect(path)
+    cursor = conn.cursor()
+    cursor.execute(
+        f"""
+        DELETE
+        FROM tb_contatos 
+        WHERE CPF = '{termo}'
+        """
+    )
+    conn.commit()
+    print(f"CPF {termo} deletado com sucesso")
     os.system("pause")
 
 
 def atualizar_registro():
     os.system("cls")
-    titulo("ATUALIZAR REGISTRO".center(50))
+    titulo("ATUALIZAR REGISTRO NO BANCO DE DADOS".center(50))
     termo = input("Informe o nº CPF para atualizar o registro: ")
+    # Conexão ao banco
+    conn = sqlite3.connect(path)
+    cursor = conn.cursor()
+    cursor.execute(f"""
+        SELECT *
+        FROM tb_contatos
+        WHERE CPF = '{termo}'
+        """)
+    
+    while True:
+        print("\033[1;94m-\033[0;0m" *50)
+        print("1 - Nome\n2 - Sobrenome\n3 - Sexo\n4 - CPF\n5 - Telefone\n6 - Email\n7 - Sair")
+        print("\033[1;94m-\033[0;0m" *50)
+
+        opcao = leiaInt("Digite a sua opção para alterar o cadastro: ")
+        if opcao == 1:
+            print()
+        elif opcao == 2:
+            print()
+        elif opcao == 3:
+            print()
+        elif opcao == 4:
+            print()
+        elif opcao == 6:
+            print()
+        elif opcao == 7:
+            print("\033[32mSaindo do programa... Até logo!\33[m")
+            break
+        else:
+            print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
     os.system("pause")
+
+
+# def contagem_registro():
+#     conn = sqlite3.connect(path)
+#     cursor = conn.cursor()
+#     cursor.execute(
+#         """
+#         SELECT COUNT(*) as Total
+#         FROM tb_contatos
+#         """)
 
 
 def menu():
@@ -229,6 +283,7 @@ def menu():
         titulo("SISTEMA BANCO DE DADOS - AGENDA ".center(50))
         print("1 - Conexão Banco de Dados\n2 - Criar Tabela\n3 - Listar Tabelas\n4 - Deletar Tabela\n5 - Novo Registro\n6 - Imprimir Registro\n7 - Buscar Registro\n8 - Deletar Registro\n9 - Atualizar Registro\n10 - Sair")
         print("\033[1;94m-\033[0;0m" *50)
+        #print(f"Ao todo temos {contagem_registro()} registro(s) na tabela")
 
         opcao = leiaInt("Digite a sua opção: ")
         if opcao == 1:
@@ -253,6 +308,6 @@ def menu():
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
         else:
-            print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
+            print("\033[31mOpção inválida. Digite entre 1 e 10\33[m")
 
 menu()
