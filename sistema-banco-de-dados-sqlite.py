@@ -1,4 +1,5 @@
 import os
+from re import T
 import sqlite3
 from sqlite3 import Error
 from time import sleep
@@ -246,19 +247,10 @@ def deletar_registro():
 def atualizar_registro():
     os.system("cls")
     titulo("ATUALIZAR REGISTRO NO BANCO DE DADOS".center(50))
-    termo = input("Informe o nº CPF para atualizar o registro: ")
+    buscar_registro()
     # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
-    cursor.execute(f"""
-        SELECT *
-        FROM tb_contatos
-        WHERE CPF = '{termo}'
-        """)
-
-    titulo("REGISTRO ATUAL DO CONTATO".center(50))
-    for agenda_cpf in cursor.fetchall():
-            print(f"Nome: {agenda_cpf[1]}\nSobrenome: {agenda_cpf[2]}\nSexo: {agenda_cpf[3]}\nCPF: {agenda_cpf[4]}\nTelefone: {agenda_cpf[5]}\nE-mail: {agenda_cpf[6]}")
     print("\033[1;94m-\033[0;0m" *50)
 
     while True:
@@ -276,7 +268,8 @@ def atualizar_registro():
                 WHERE CPF = '{termo}'
                 """)
             conn.commit()
-            print("Registro atualizado com sucesso")
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 2:
             termo = input("Informe o nº CPF para localizar o registro: ")
@@ -287,7 +280,8 @@ def atualizar_registro():
                 WHERE CPF = '{termo}'
                 """)
             conn.commit()
-            print("Registro atualizado com sucesso")
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 3:
             termo = input("Informe o nº CPF para localizar o registro: ")
@@ -302,7 +296,8 @@ def atualizar_registro():
                     WHERE CPF = '{termo}'
                     """)
             conn.commit()
-            print("Registro atualizado com sucesso")    
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 4:
             termo = input("Informe o nº CPF para localizar o registro: ")
@@ -313,7 +308,8 @@ def atualizar_registro():
                 WHERE CPF = '{termo}'
                 """)
             conn.commit()
-            print("Registro atualizado com sucesso")
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 5:
             termo = input("Informe o nº CPF para localizar o registro: ")
@@ -324,7 +320,8 @@ def atualizar_registro():
                 WHERE CPF = '{termo}'
                 """)
             conn.commit()
-            print("Registro atualizado com sucesso")
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 6:
             termo = input("Informe o nº CPF para localizar o registro: ")
@@ -335,11 +332,15 @@ def atualizar_registro():
                 WHERE CPF = '{termo}'
                 """)
             conn.commit()
-            print()
+            sleep(0.5)
+            print("\033[32mRegistro atualizado com sucesso\33[m")
+
         elif opcao == 7:
+            sleep(0.5)
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
         else:
+            sleep(0.5)
             print("\033[31mOpção inválida. Digite entre 1 e 7\33[m")
     os.system("pause")
 
