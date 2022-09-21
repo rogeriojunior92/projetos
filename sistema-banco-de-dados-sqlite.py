@@ -37,7 +37,7 @@ def leiaInt(msg):
 # Função para criar conexão com o Banco de Dados
 def conexao_banco():
     os.system("cls")
-    titulo("VALIDAR CONEXÃO COM O BANCO DE DADOS".center(50))
+    titulo("CONEXÃO COM O BANCO DE DADOS".center(50))
     try:
         # Verifica no diretório se o banco de dados já existe
         if not (os.path.exists(path)):
@@ -63,7 +63,7 @@ def criar_tabela():
     try:
         # Conexão sqlite3 com banco de dados
         cursor = sqlite3.connect(path)
-        # Criando a tabela
+        # Criar tabela
         cursor.executescript("""
             CREATE TABLE IF NOT EXISTS tb_contatos
             (
@@ -76,8 +76,10 @@ def criar_tabela():
                 EMAIL VARCHR(50) NOT NULL
             );"""
         )
+        sleep(0.5)
         print("\033[32mTabela criada com sucesso\33[m")
     except Error as er:
+        sleep(0.5)
         print(f"\033[31mOcorreu um erro na criação da tabela {er}\33[m")
 
 
@@ -110,6 +112,7 @@ def listar_tabela():
             print(str(tabela[0]).center(30))
         
     except Error as er:
+        sleep(0.5)
         print(f"\033[31mOcorreu um erro na execução da query {er}\33[m")
 
 
@@ -124,8 +127,10 @@ def deletar_tabela():
         sql_query = ( f"""DROP TABLE tb_{termo}""")
         cursor = conn.cursor()
         cursor.execute(sql_query)
+        sleep(0.5)
         print("\033[32mTabela excluido com sucesso\33[m")
     except Error as er:
+        sleep(0.5)
         print(f"\033[31mOcorreu um erro na exclusão da tabela {er}\33[m")
 
 
@@ -211,6 +216,7 @@ def buscar_registro():
     """)
     print("\033[1;94m-\033[0;0m" *50)
     for agenda_cpf in cursor.fetchall():
+        sleep(0.5)
         print(f"Nome: {agenda_cpf[1]}\nSobrenome: {agenda_cpf[2]}\nSexo: {agenda_cpf[3]}\nCPF: {agenda_cpf[4]}\nTelefone: {agenda_cpf[5]}\nE-mail: {agenda_cpf[6]}")
     print("\033[1;94m-\033[0;0m" *50)
     conn.commit()
@@ -249,22 +255,86 @@ def atualizar_registro():
         FROM tb_contatos
         WHERE CPF = '{termo}'
         """)
-    
+
+    titulo("REGISTRO ATUAL DO CONTATO".center(50))
+    for agenda_cpf in cursor.fetchall():
+            print(f"Nome: {agenda_cpf[1]}\nSobrenome: {agenda_cpf[2]}\nSexo: {agenda_cpf[3]}\nCPF: {agenda_cpf[4]}\nTelefone: {agenda_cpf[5]}\nE-mail: {agenda_cpf[6]}")
+    print("\033[1;94m-\033[0;0m" *50)
+
     while True:
-        print("\033[1;94m-\033[0;0m" *50)
+        titulo("CAMPOS ABAIXOS PARA ATUALIZAR".center(50))
         print("1 - Nome\n2 - Sobrenome\n3 - Sexo\n4 - CPF\n5 - Telefone\n6 - Email\n7 - Sair")
         print("\033[1;94m-\033[0;0m" *50)
-
+        
         opcao = leiaInt("Digite a sua opção para alterar o cadastro: ")
         if opcao == 1:
-            print()
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            alterar_nome = input("Alterar nome para: ")
+            cursor.execute(f"""
+                UPDATE tb_contatos
+                SET NOME = '{alterar_nome}'
+                WHERE CPF = '{termo}'
+                """)
+            conn.commit()
+            print("Registro atualizado com sucesso")
+
         elif opcao == 2:
-            print()
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            alterar_sobrenome = input("Alterar sobrenome para: ")
+            cursor.execute(f"""
+                UPDATE tb_contatos
+                SET SOBRENOME = '{alterar_sobrenome}'
+                WHERE CPF = '{termo}'
+                """)
+            conn.commit()
+            print("Registro atualizado com sucesso")
+
         elif opcao == 3:
-            print()
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            while True:
+                alterar_sexo = input("Alterar sexo para: [M/F] ").upper()[0]
+                if alterar_sexo in "MF":
+                    break
+                print("ERRO! Digite apenas M ou F")
+                cursor.execute(f"""
+                    UPDATE tb_contatos
+                    SET SEXO = '{alterar_sexo}'
+                    WHERE CPF = '{termo}'
+                    """)
+            conn.commit()
+            print("Registro atualizado com sucesso")    
+
         elif opcao == 4:
-            print()
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            alterar_cpf = input("Alterar CPF para: ")
+            cursor.execute(f"""
+                UPDATE tb_contatos
+                SET CPF = '{alterar_cpf}'
+                WHERE CPF = '{termo}'
+                """)
+            conn.commit()
+            print("Registro atualizado com sucesso")
+
+        elif opcao == 5:
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            alterar_telefone= input("Alterar telefone para: ")
+            cursor.execute(f"""
+                UPDATE tb_contatos
+                SET TELEFONE = '{alterar_telefone}'
+                WHERE CPF = '{termo}'
+                """)
+            conn.commit()
+            print("Registro atualizado com sucesso")
+
         elif opcao == 6:
+            termo = input("Informe o nº CPF para localizar o registro: ")
+            alterar_email = input("Alterar e-mail para: ")
+            cursor.execute(f"""
+                UPDATE tb_contatos
+                SET EMAIL = '{alterar_email}'
+                WHERE CPF = '{termo}'
+                """)
+            conn.commit()
             print()
         elif opcao == 7:
             print("\033[32mSaindo do programa... Até logo!\33[m")
