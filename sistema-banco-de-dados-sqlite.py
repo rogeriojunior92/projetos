@@ -351,7 +351,7 @@ def menu():
         titulo("SISTEMA BANCO DE DADOS".center(60))
         print("\033[1;90m1 - Conexão Banco de Dados\n2 - Criar Tabela\n3 - Listar Tabelas\n4 - Deletar Tabela\033[0;0m")
         titulo("CADASTRO BANCO DE DADOS".center(60))
-        print("\033[1;90m5 - Novo Registro\n6 - Imprimir Registro\n7 - Buscar Registro\n8 - Deletar Registro\n9 - Atualizar Registro\n10 - Sair\033[0;0m")
+        print("\033[1;90m5 - Novo Registro\n6 - Imprimir Registro\n7 - Buscar Registro\n8 - Deletar Registro\n9 - Atualizar Registro\n0 - Sair\033[0;0m")
         print("\033[1;94m-\033[0;0m" *60)
 
         opcao = leiaInt("\033[1;90mDigite a sua opção:\033[0;0m ")
@@ -374,12 +374,12 @@ def menu():
             deletar_registro()
         elif opcao == 9:
             atualizar_registro()
-        elif opcao == 10:
+        elif opcao == 0:
             sleep(0.5)
             print("\033[32mSaindo do programa... Até logo!\33[m")
             break
         else:
             sleep(0.5)
-            print("\033[31mOpção inválida. Digite entre 1 e 10\33[m")
+            print("\033[31mOpção inválida. Digite entre 0 e 9\33[m")
 
 menu()
