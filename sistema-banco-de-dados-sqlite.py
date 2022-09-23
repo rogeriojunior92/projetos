@@ -63,12 +63,14 @@ def conexao_banco():
 def criar_tabela():
     os.system("cls")
     titulo("CRIAR TABELA NO BANCO DE DADOS".center(60))
+    termo = input("\033[1;90m• Favor, digite o nome da tabela que deseja criar: \033[0;0m")
     try:
         # Conexão sqlite3 com banco de dados
-        cursor = sqlite3.connect(path)
+        conn = sqlite3.connect(path)
+        cursor = conn.cursor()
         # Criar tabela
-        cursor.executescript("""
-            CREATE TABLE IF NOT EXISTS tb_contatos
+        tables = (f"""
+            CREATE TABLE IF NOT EXISTS tb_{termo}
             (
                 ID INTEGER PRIMARY KEY AUTOINCREMENT,
                 NOME VARCHAR(30) NOT NULL,
@@ -79,8 +81,15 @@ def criar_tabela():
                 EMAIL VARCHR(50) NOT NULL
             );"""
         )
-        sleep(0.5)
-        print("\033[32mTabela criada com sucesso\33[m")
+        cursor.execute(tables)
+
+        sleep(0.5) 
+        # Verifica se a tabela existe
+        if f'tb_{termo}' in tables:
+            print(f"Tabela \033[32mtb_{termo}\33[m criada com sucesso")
+        else:
+            print(f"Tabela \033[31mtb_{termo}\33[m já existe no banco")   
+
     except Error as er:
         sleep(0.5)
         print(f"\033[31mOcorreu um erro na criação da tabela {er}\33[m")
@@ -103,20 +112,21 @@ def listar_tabela():
         cursor = conn.cursor()
         cursor.execute(sql_query)
         
-        print("ID".center(3), end='')
-        print("Tabela".center(30))
+        print("ID".center(5), end='')
+        print("Tabela".center(40))
 
         for indice_query in list(enumerate(cursor.fetchall(), start=1)):
 
             indice = indice_query[0]
             tabela = indice_query[1]
 
-            print(str(indice).center(3), end='')
-            print(str(tabela[0]).center(30))
+            print(str(indice).center(5), end='')
+            print(str(tabela[0]).center(40))
         
     except Error as er:
         sleep(0.5)
         print(f"\033[31mOcorreu um erro na execução da query {er}\33[m")
+    print("\033[1;94m-\033[0;0m" *60)
     os.system("pause")
 
 
@@ -124,7 +134,7 @@ def listar_tabela():
 def deletar_tabela():
     os.system("cls")
     titulo("DELETAR TABELA DO BANCO DE DADOS".center(60))
-    termo = input("Informe o nome da tabela que deseja remover: ")
+    termo = input("\033[1;90m• Informe o nome da tabela que deseja remover: \033[0;0m")
     # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     try:
@@ -162,6 +172,8 @@ def novo_registro():
     cursor.execute(f"""
     INSERT INTO tb_contatos ('NOME', 'SOBRENOME', 'SEXO', 'CPF', 'TELEFONE', 'EMAIL')
     VALUES ('{nome}','{sobrenome}','{sexo}','{cpf}','{telefone}','{email}')""")
+    # Grava as alterações na tabela. 
+    # Lembrando que uma tabela é alterada com as instruções SQL: INSERT, UPDATE e DELETE.
     conn.commit()
 
     sleep(0.5)
@@ -208,7 +220,7 @@ def imprimir_registro():
 def buscar_registro():
     os.system("cls")
     titulo("BUSCAR REGISTROS NO BANCO DE DADOS".center(60))
-    termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+    termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
     # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
@@ -217,7 +229,8 @@ def buscar_registro():
         SELECT *
         FROM tb_contatos
         WHERE CPF = '{termo}'""")
-
+    
+    # Iteração para buscar todos os registros no banco.
     for agenda_cpf in cursor.fetchall():
         sleep(0.5)
         print(f"Nome: {agenda_cpf[1]}\nSobrenome: {agenda_cpf[2]}\nSexo: {agenda_cpf[3]}\nCPF: {agenda_cpf[4]}\nTelefone: {agenda_cpf[5]}\nE-mail: {agenda_cpf[6]}")
@@ -230,7 +243,7 @@ def buscar_registro():
 def deletar_registro():
     os.system("cls")
     titulo("DELETAR REGISTRO NO BANCO DE DADOS".center(60))
-    termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+    termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
     # Conexão sqlite3 com banco de dados
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
@@ -260,7 +273,7 @@ def atualizar_registro():
         
         opcao = leiaInt("Digite a sua opção para alterar o cadastro: ")
         if opcao == 1:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             alterar_nome = input("\033[1;90mAlterar nome para: \033[0;0m")
             cursor.execute(f"""
                 UPDATE tb_contatos
@@ -272,7 +285,7 @@ def atualizar_registro():
             print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 2:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             alterar_sobrenome = input("\033[1;90mAlterar sobrenome para: \033[0;0m")
             cursor.execute(f"""
                 UPDATE tb_contatos
@@ -284,7 +297,7 @@ def atualizar_registro():
             print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 3:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             while True:
                 alterar_sexo = input("\033[1;90mAlterar sexo para: [M/F] \033[0;0m").upper()[0]
                 if alterar_sexo in "MF":
@@ -300,7 +313,7 @@ def atualizar_registro():
             print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 4:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             alterar_cpf = input("\033[1;90mAlterar CPF para: \033[0;0m")
             cursor.execute(f"""
                 UPDATE tb_contatos
@@ -312,7 +325,7 @@ def atualizar_registro():
             print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 5:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             alterar_telefone= input("\033[1;90mAlterar telefone para: \033[0;0m")
             cursor.execute(f"""
                 UPDATE tb_contatos
@@ -324,7 +337,7 @@ def atualizar_registro():
             print("\033[32mRegistro atualizado com sucesso\33[m")
 
         elif opcao == 6:
-            termo = input("\033[1;90m• Favor, innformar o nº CPF para buscar o registro: \033[0;0m")
+            termo = input("\033[1;90m• Favor, informar o nº CPF para buscar o registro: \033[0;0m")
             alterar_email = input("\033[1;90mAlterar e-mail para: \033[0;0m")
             cursor.execute(f"""
                 UPDATE tb_contatos
@@ -349,7 +362,7 @@ def menu():
     os.system("cls")
     while True:
         titulo("SISTEMA BANCO DE DADOS".center(60))
-        print("\033[1;90m1 - Conexão Banco de Dados\n2 - Criar Tabela\n3 - Listar Tabelas\n4 - Deletar Tabela\033[0;0m")
+        print("\033[1;90m1 - Conexão Banco de Dados\n2 - Criar Tabela\n3 - Visualizar Tabela\n4 - Deletar Tabela\033[0;0m")
         titulo("CADASTRO BANCO DE DADOS".center(60))
         print("\033[1;90m5 - Novo Registro\n6 - Imprimir Registro\n7 - Buscar Registro\n8 - Deletar Registro\n9 - Atualizar Registro\n0 - Sair\033[0;0m")
         print("\033[1;94m-\033[0;0m" *60)
@@ -381,5 +394,7 @@ def menu():
         else:
             sleep(0.5)
             print("\033[31mOpção inválida. Digite entre 0 e 9\33[m")
+    print("\033[1;94m-\033[0;0m" *60)
+    
 
 menu()
