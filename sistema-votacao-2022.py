@@ -42,28 +42,28 @@ def selecao_candidatos():
 
     opcao = leiaInt("Digite a sua opção para votar: ")
     if opcao == 1:
-        bolsonaro += 1
         lista_bolsonaro.append(bolsonaro)
+        bolsonaro += 1
         print("Você votou em Jair Bolsonaro (PL)")
     elif opcao == 2:
-        lula +=1
         lista_lula.append(lula)
+        lula +=1
         print("Você votou em Lula (PT)")
     elif opcao == 3:
-        ciro_gomes +=1
         lista_ciro_gomes.append(ciro_gomes)
+        ciro_gomes +=1
         print("Você votou em Ciro Gomes (PDT)")
     elif opcao == 4:
-        andre_janones +=1
         lista_andre_janones.append(andre_janones)
+        andre_janones +=1
         print("Você votou em André Janones (Avante)")
     elif opcao == 5:
-        leonardo_pericles +=1
         lista_leonardo_pericles.append(leonardo_pericles)
+        leonardo_pericles +=1
         print("Você votou em Leonardo Péricles (Unidade Popular)")
     elif opcao == 6:
-        nulo +=1
         lista_nulo.append(nulo)
+        nulo +=1
         print("Você votou em Nulo (Sem partido)")
     elif opcao == 7:
         print("\033[32mSaindo da tela de seleção de candidatos\33[m")
