@@ -47,7 +47,7 @@ def criar_conta():
         print("\033[36m-\33[m" *85)
 
         opcao = leiaInt("Digite a sua opção: ")
-        # Opção 1: Para cadastrar conta PF
+        # Opção 1: Para cadastrar uma nova conta Pessoa Fisica
         if opcao == 1:
             os.system('cls')
             titulo("ABERTURA DE CONTA - PESSOA FISICA".center(85))
@@ -64,13 +64,13 @@ def criar_conta():
                 conta["Saldo"] = float(input("Saldo: R$ "))
                 conta["Limite"] = float(input("Limite: R$ "))
 
-            # Lista para armazenar o cadastro das contas cadastradas PF
+            # Lista para armazenar o cadastro de Pessoa Fisica através do dicionário
             lista_conta.append(conta.copy())
             sleep(0.5)
             print("\033[32mConta de Pessoa Física cadastrado com sucesso\33[m")
         
         elif opcao == 2:
-            # Opção 1: Para cadastrar conta PJ
+            # Opção 1: Para cadastrar uma nova conta Pessoa Juridica
             os.system('cls')
             titulo("ABERTURA DE CONTA - PESSOA JURIDICA".center(85))
             conta_pj['Numero'] = int(input("Nº da Conta: "))
@@ -87,7 +87,7 @@ def criar_conta():
                 conta_pj['Saldo'] = float(input("Saldo: R$ "))
                 conta_pj['Limite'] = float(input("Limite: R$ "))
 
-            # Lista para armazenar o cadastro das contas cadastradas PJ
+            # Lista para armazenar o cadastro de Pessoa Juridica através do dicionário
             lista_conta_pj.append(conta_pj.copy())
             sleep(0.5)
             print("\033[32mConta de Pessoa Juridica cadastrado com sucesso\33[m")
@@ -111,20 +111,22 @@ def consultar_conta():
         print("\033[36m-\33[m" *85)
 
         opcao = leiaInt("Digite a sua opção: ")
-        # Iteração na lista_conta, retorna as informações com indice.
+        # Opção 1: Para consultar cadastro da conta Pessoa Física
         if opcao == 1:
             os.system('cls')
             titulo("CONTAS CADASTRADAS - PESSOA FÍSICA".center(85))
             print(f"{'Nº':^4}{'Nº CONTA':^20}{'TITULAR':^20}{'SALDO':^20}{'LIMITE':^20}")
+            # Iteração na lista_conta, retorna as informações com indice.
             for i, lista in enumerate(lista_conta):
                 sleep(0.5)
                 print(f"{i:^4}{lista['Numero']:^20}{lista['Titular']:^20}{lista['Saldo']:^20.2f}{lista['Limite']:^20.2f}")
 
-        # Iteração na lista_conta_pj, retorna as informações com indice.
+        # Opção 2: Para consultar cadastro da conta Pessoa Juridica
         elif opcao == 2:
             os.system('cls')
             titulo("CONTAS CADASTRADAS - PESSOA JURIDICA".center(85))
             print(f"{'Nº':^4}{'Nº CONTA':^20}{'CNPJ':^20}{'TITULAR':^20}{'SALDO':^20}{'LIMITE':^20}")
+            # Iteração na lista_conta_pj, retorna as informações com indice.
             for i, lista_cnpj in enumerate(lista_conta_pj):
                 sleep(0.5)
                 print(f"{i:^4}{lista_cnpj['Numero']:^20}{lista_cnpj['CNPJ']:^20}{lista_cnpj['Titular']:^20}{lista_cnpj['Saldo']:^20.2f}{lista_cnpj['Limite']:^20.2f}")
@@ -148,6 +150,7 @@ def sacar_conta():
         print("\033[36m-\33[m" *85)
 
         opcao = leiaInt("Digite a sua opção: ")
+        # Opção 1: Para para sacar valores da conta Pessoa Fisica
         if opcao == 1:
             termo = int(input("Favor, informe o número da conta que deseja sacar: "))        
             titulo("RESUMO DA CONTA - PESSOA FÍSICA".center(85))
@@ -170,7 +173,8 @@ def sacar_conta():
                 else:
                     sleep(0.5)
                     print(f"\033[31mNúmero de conta {termo} inexistente\33[m")
-                
+
+        # Opção 2: Para para sacar valores da conta Pessoa Juridica
         elif opcao == 2:
             os.system('cls')
             termo = int(input("Favor, informe o número da conta que deseja sacar: "))
@@ -196,7 +200,7 @@ def sacar_conta():
                     print(f"\033[31mNúmero de conta {termo} inexistente\33[m")
 
         elif opcao == 0:
-            print("\033[32mSaindo da opção de Listar Contas Cadastradas!\33[m")
+            print("\033[32mSaindo da opção de Saque\33[m")
             break
         else:
             sleep(0.5)
@@ -214,6 +218,7 @@ def depositar():
         print("\033[36m-\33[m" *85)
 
         opcao = leiaInt("Digite a sua opção: ")
+        # Opção 1: Para para depositar valores da conta Pessoa Fisica
         if opcao == 1:
             termo = int(input("Favor, informe o número da conta que deseja depositar: "))
             # Iteração na lista_conta
@@ -232,6 +237,7 @@ def depositar():
                     sleep(0.5)
                     print(f"\033[31mNúmero de conta {termo} inexistente\33[m")
         
+        # Opção 2: Para para depositar valores da conta Pessoa Juridica
         elif opcao == 2:
             os.system("cls")
             termo = int(input("Favor, informe o número da conta que deseja depoistar: "))
@@ -269,6 +275,7 @@ def extrato():
         print("\033[36m-\33[m" *85)
 
         opcao = leiaInt("Digite a sua opção: ")
+        # Opção 1: Para para consultar extrato da conta Pessoa Fisica
         if opcao == 1:
             # Variável que busca o cadastro da conta PF através do número da conta
             termo = int(input("Favor, informe o número da conta que deseja consultar o extrato PF: "))
@@ -287,6 +294,7 @@ def extrato():
                     sleep(0.5)
                     print(f"\033[31mNúmero de conta {termo} inexistente\33[m")
         
+        # Opção 1: Para para consultar extrato da conta Pessoa Juridica
         elif opcao == 2:
             os.system("cls")
             # Variável que busca o cadastro da conta PJ através do número da conta
