@@ -7,3 +7,9 @@
     Sexo: 'f' ou 'm';
     Estado Civil: 's', 'c', 'v', 'd'; 
 """
+
+while True:
+    nome = input("Digite o nome: ")
+    if len(nome) < 3:
+        print("ERRO! Digite o nome novamente.")
+        break
