@@ -1,12 +1,15 @@
 """
 03. Faça um programa, com uma função que necessite de três argumentos, e que forneça a soma desses três argumentos. 
 """
-import logging
-
-logging.basicConfig(level=logging.INFO)
 
 def soma(n1, n2, n3):
-    somar = n1 + n2 + n3
-    logging.info(f"{n1} + {n2} + {n3} = {somar}")
+    return(n1 + n2 + n3)
 
-soma(1, 2, 3)
+
+# Programa principal
+n1 = int(input("Primeiro número: "))
+n2 = int(input("Primeiro número: "))
+n3 = int(input("Primeiro número: "))
+resultado = n1 + n2 + n3
+print(f"{n1} + {n2} + {n3} = {resultado}")
+soma(n1, n2, n3)

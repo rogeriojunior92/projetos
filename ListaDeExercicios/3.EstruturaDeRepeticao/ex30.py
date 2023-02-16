@@ -9,3 +9,11 @@ desenvolver o programa que monta a tabela de preços de pães, de 1 até 50 pãe
     ...
     50 - R$ 9.00
 """
+
+preco_pao = 0.18
+
+print()
+print("Panificadora Pão de Ontem - Tabela de preços")
+for i, c in enumerate(range(1, 51)):
+    tabela = c * preco_pao
+    print(f"{i+1} - R$ {tabela:.2f}")

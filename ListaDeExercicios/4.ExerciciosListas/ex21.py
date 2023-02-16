@@ -66,4 +66,4 @@ f"\n{'3'} - {lista_carros[2]:^10} - {lista_km[2]:^10} - {lista_litros[2]:^10.2f}
 f"\n{'4'} - {lista_carros[3]:^10} - {lista_km[3]:^10} - {lista_litros[3]:^10.2f}litros  -  R$ {lista_preco[3]:^5.2f}",
 f"\n{'5'} - {lista_carros[4]:^10} - {lista_km[4]:^10} - {lista_litros[4]:^10.2f}litros  -  R$ {lista_preco[4]:^5.2f}"
     )
-print("O menor consumo é do veículo {}")
+print(f"O menor consumo é do veículo {min(lista_preco)}")

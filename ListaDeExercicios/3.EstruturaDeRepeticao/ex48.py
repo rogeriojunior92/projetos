@@ -6,3 +6,12 @@
       12376489
       => 98467321
 """
+
+lista_numero = []
+
+for c in range(1, 10):
+  num = int(input("Entre com o número: "))
+  lista_numero.append(num)
+
+lista_numero.reverse()
+print(f"=> {lista_numero}")

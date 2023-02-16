@@ -32,11 +32,11 @@ except:
 # Ler o arquivo CSV
 # Criar o arquivo CSV e concatenando com o diretório
 sleep(1)
-print("\033[34m ----------------- INICIANDO EXTRAÇÃO DOS DADOS -----------------\33[m")
+print("\033[34m ----------------- INICIANDO EXTRAÇÃO DOS DADOS ------------------\33[m")
 for city in list_city:
     url = f"https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/{city}/{data_inicio}/{data_fim}?unitGroup=metric&include=days&key={key}&contentType=csv"
     sleep(1)
-    print(f"EXTRAINDO DADOS \033[32m{city}\33[m")
+    print(f"------------------ EXTRAINDO DADOS \033[32m{city} ------------------\33[m")
     dados = pd.read_csv(url)
     print(dados.head())  
     dados.to_csv(path + f'dados_brutos_{city}.csv')

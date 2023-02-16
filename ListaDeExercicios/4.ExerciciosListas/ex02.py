@@ -5,8 +5,8 @@
 lista_numero = []
 
 for c in range(1, 11):
-    num = int(input(f"Digite o {c}º número: "))
+    num = float(input(f"Digite o {c}º número: "))
     lista_numero.append(num)
 
 lista_numero.reverse()
-print(f"Lista Reversa: {lista_numero} ")
+print(f"Lista Reversa: {lista_numero:.1f} ")

@@ -13,3 +13,32 @@ Após esta operação, o programa deverá voltar ao ponto inicial, para registra
     Troco: R$ 11.00
     ...
 """
+import os
+
+while True:
+    print("LOJAS TABAJARA")
+    print("-" *30)
+    total = c = 0
+
+    while True:
+        preco = float(input(f"Produto {c+1}: R$ "))
+        c +=1
+        total += preco
+        if preco == 0:
+            break     
+        
+    print("-" *30)
+    print(f"Total: R$ {total:.2f}")
+    dinheiro = float(input("Dinheiro: R$ "))
+    print("-" *30)
+    print(f"Troco R$ {dinheiro - total:.2f}")
+
+    print("-" *30)
+    print("0 - Reset\n1 - Encerrar")
+
+    opcao = int(input("Qual é a sua opção: "))
+    if opcao == 0:
+        os.system("cls")
+    else:
+        print("Saindo do Programa")
+        break

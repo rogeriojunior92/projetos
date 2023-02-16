@@ -9,3 +9,12 @@ na tabela de preços. Você foi contratado para desenvolver o programa que monta
     ...
     50 - R$ 99.50
 """
+
+artigos = 1.99
+indice = 0
+
+print("Lojas Quase Dois - Tabela de preços")
+for c in range(1, 51):
+    tabela = c * 1.99
+    print(f"{indice+1} - R$ {tabela:.2f}")
+    indice +=1
