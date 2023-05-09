@@ -13,32 +13,33 @@ Após esta operação, o programa deverá voltar ao ponto inicial, para registra
     Troco: R$ 11.00
     ...
 """
-import os
-
 while True:
-    print("LOJAS TABAJARA")
-    print("-" *30)
-    total = c = 0
+    print("-" *40)
+    print("LOJAS TABAJARA".center(40))
+    print("-" *40)
 
+    c = total = 0
     while True:
-        preco = float(input(f"Produto {c+1}: R$ "))
-        c +=1
-        total += preco
-        if preco == 0:
-            break     
+        preco_mercadoria = float(input(f"Produto {c+1}: R$ "))
+        if preco_mercadoria == 0:
+            break
         
-    print("-" *30)
+        c+=1
+        total += preco_mercadoria
+
+    dinheiro = float(input("Digite a quantia para pagar: R$ "))
+    troco = dinheiro - total
+
+    print("-" *40)
     print(f"Total: R$ {total:.2f}")
-    dinheiro = float(input("Dinheiro: R$ "))
-    print("-" *30)
-    print(f"Troco R$ {dinheiro - total:.2f}")
-
-    print("-" *30)
-    print("0 - Reset\n1 - Encerrar")
-
-    opcao = int(input("Qual é a sua opção: "))
-    if opcao == 0:
-        os.system("cls")
-    else:
-        print("Saindo do Programa")
+    print(f"Dinheiro: R$ {dinheiro:.2f}")
+    print(f"Troco: R$ {troco:.2f}")
+    print("-" *40)
+    
+    while True:
+        resp = input("Quer continuar? [S/N] ").upper()[0]
+        if resp in "SN":
+            break
+        print("\033[31mERRO! Digite apenas S ou N.")
+    if resp == "N":
         break

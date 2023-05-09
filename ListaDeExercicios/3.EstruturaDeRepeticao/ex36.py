@@ -14,3 +14,11 @@ o valor inicial e final devem ser informados também pelo usuário, conforme exe
 
     Obs: Você deve verificar se o usuário não digitou o final menor que o inicial. 
 """
+
+num = int(input("Montar a tabuada de: "))
+comeco = int(input("Começar por: "))
+fim = int(input("Terminar em: "))
+
+print(f"Vou montar a tabuada de {num} começando em {comeco} e terminando em {fim}:")
+for c in range(comeco, fim+1):
+    print(f"{num} x {c} = {num * c}")
