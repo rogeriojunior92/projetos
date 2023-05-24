@@ -1,4 +1,5 @@
 # Importar bibliotecas
+import os
 import pandas as pd
 from time import sleep
 from selenium import webdriver
@@ -10,7 +11,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 
-print()
+directory_path = os.path.dirname(__file__).replace("\\", "/")
+print(directory_path)
+
 product = input("O que deseja buscar? ").title().strip()
 while product == "":
     print("\033[31mDados Inválido.\33[m")
@@ -43,7 +46,7 @@ dict_final = {"produto": [], "preco": [], "url":[]}
 
 print("\033[32m----- Starting ETL WebScraping -----\33[m")
 c = 0
-# Loop infinito para raspagem de cada página
+# Loop para raspagem de cada página
 while True:
     # Iteração com o layout de cada aparelho
     for iphone in navegador.find_elements('xpath', '//li[@class="ui-search-layout__item shops__layout-item"]'): # Obtém o layout de cada aparelho
@@ -76,4 +79,4 @@ print("\033[32mDataframe created.\33[m")
 print()
 df_iphone = pd.DataFrame(dict_final, columns=['produto', 'preco', 'url'])
 print(df_iphone)
-df_iphone.to_csv(f"C:/Users/Dell/Documents/Eng/Projetos/venv/{executionName}.csv", encoding='utf-8', sep=';')
+df_iphone.to_csv(f"{directory_path}/{executionName}.csv", encoding='utf-8', sep=';')
