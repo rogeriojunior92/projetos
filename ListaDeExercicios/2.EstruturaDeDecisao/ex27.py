@@ -8,29 +8,40 @@
     Se o cliente comprar mais de 8 Kg em frutas ou o valor total da compra ultrapassar R$ 25,00, receberá ainda um desconto de 10% sobre este total. 
     Escreva um algoritmo para ler a quantidade (em Kg) de morangos e a quantidade (em Kg) de maças adquiridas e escreva o valor a ser pago pelo cliente. 
 """
+morango = int(input("Quantidade de morangos (em Kg): "))
+maca = int(input("Quantidade de maças (em Kg): "))
 
-morango_ate_5kg = 2.50
-maca_ate_5kg = 1.80
+morango_ate_5kg = morango * 2.50
+morango_acima_5kg = morango * 2.20
 
-morango_acima_5kg = 2.20
-maca_acima_5kg = 1.50
+maca_ate_5kg = maca * 1.80
+maca_acima_5kg = maca * 1.5
 
-qtde_morango = int(input("Digite a quantidade de morangos (kg): "))
-qtde_maca = int(input("Digite a quantidade de maça (kg): "))
 
-if qtde_morango <= 5:
-    valor_morango = qtde_morango * morango_ate_5kg
+if morango > 5:
+    preco_morango = morango_ate_5kg
 else:
-    valor_morango = qtde_morango * morango_acima_5kg
+    preco_morango = morango_acima_5kg
 
-if qtde_maca > 5:
-    valor_maca = qtde_maca * maca_acima_5kg
+if maca > 5:
+    preco_maca = maca_ate_5kg
 else:
-    valor_maca = qtde_maca * maca_ate_5kg
+    preco_maca = maca_acima_5kg
+
+qtde = morango + maca
+total = preco_morango + preco_maca
+
+if qtde > 8 or total > 25:
+    desc = total * 10/100
+else:
+    desc = 'Não possui desconto'
+    print(f"{desc}")
 
 print("-" *40)
-valor_total = valor_morango + valor_maca
-print(f"Valor Total R$ {valor_total:.2f}")
-if valor_total > 25 or (qtde_morango + qtde_maca) > 8:
-    desc = valor_total * 0.1
-    print(f"Desconto de 10% R$ {desc}")
+print(f"Quantidade de Morango: {morango}")
+print(f"Quantidade de Maças: {maca}")
+print(f"Quantidade total de frutas: {qtde}Kg")
+print(f"Valor total R$ {total:.2f}")
+print("-" *40)
+print(f"Desconto de 10% sobre este total R$ {desc:.2f}")
+print("-" *40)

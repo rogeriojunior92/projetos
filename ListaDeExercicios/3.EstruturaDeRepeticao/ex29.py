@@ -15,6 +15,6 @@ indice = 0
 
 print("Lojas Quase Dois - Tabela de preços")
 for c in range(1, 51):
-    tabela = c * 1.99
+    tabela = c * artigos
     print(f"{indice+1} - R$ {tabela:.2f}")
     indice +=1

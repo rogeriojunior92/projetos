@@ -34,3 +34,10 @@ while True:
     if sexo in "MF":
         break
     print("\033[31mERRO! Digite apenas M ou F\33[m")
+
+
+estado_civil = input("Digite o Estado Cívil [s, c, v ou d]: ").lower()[0]
+while estado_civil not in ['s', 'c', 'v', 'd']:
+    print("\033[31mDados Inválidos.\33[m")
+    estado_civil = input("Digite o Estado Cívil [s, c, v ou d]: ").lower()[0]
+print(f"Você digitou {estado_civil}")
