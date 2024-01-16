@@ -14,7 +14,7 @@ def titulo(txt):
     print("\033[1;94m-\033[0;0m" *50)
 
 
-# Funçãio que válida número inteiro e interrupção do teclado
+# Função que válida número inteiro e interrupção do teclado
 def leiaInt(msg):
     while True:
         try:
