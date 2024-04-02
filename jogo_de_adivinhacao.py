@@ -2,7 +2,7 @@ import random
 
 # -----------------------------------------------------------------------------------------------------------
 """
-Para contar o número de tentativas que o jogador fez.
+Contador de número de tentativas que o jogador fez.
 """
 tentativas = 0
 
