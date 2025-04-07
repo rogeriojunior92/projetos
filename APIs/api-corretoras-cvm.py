@@ -21,22 +21,23 @@ def criar_diretorio(folder):
     return BASE_FOLDER
 
 # ---------------------------------------------------------------------------------------------------------
-def busca_dados():
+def busca_dados(BASE_URL):
     
-    BASE_URL = "https://brasilapi.com.br/api/cvm/corretoras/v1"
     request = requests.get(BASE_URL)
     request_dict = request.json()   
     return request_dict
 
 # ---------------------------------------------------------------------------------------------------------
-dados_dict = {"cnpj":[], "type":[], "nome_social":[], "nome_comercial":[], "status":[], "email":[],
-         "telefone":[], "cep":[], "pais":[], "uf":[], "municipio":[], "bairro":[], "complemento":[],
-         "logradouro":[], "data_patrimonio_liquido":[], "valor_patrimonio_liquido":[], "codigo_cvm":[],
-         "data_inicio_situacao":[], "data_registro":[]}
-
-
 def main():
-    dados = busca_dados()
+
+    dados_dict = {"cnpj":[], "type":[], "nome_social":[], "nome_comercial":[], "status":[], "email":[],
+            "telefone":[], "cep":[], "pais":[], "uf":[], "municipio":[], "bairro":[], "complemento":[],
+            "logradouro":[], "data_patrimonio_liquido":[], "valor_patrimonio_liquido":[], "codigo_cvm":[],
+            "data_inicio_situacao":[], "data_registro":[]}
+
+
+    BASE_URL = "https://brasilapi.com.br/api/cvm/corretoras/v1"
+    dados = busca_dados(BASE_URL)
 
     for requisicao in dados:          
         cnpj = requisicao['cnpj']

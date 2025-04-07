@@ -1,0 +1,11 @@
+# Ignorar o arquivo .env que contém as credenciais
+.env
+
+# Ignorar arquivos de compilação
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignorar a pasta de virtualenv (se estiver usando)
+venv/
