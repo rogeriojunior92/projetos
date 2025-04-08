@@ -49,7 +49,7 @@ def inserir_usuario(driver):
     time.sleep(2)
 
     # Obtém o endereço de e-mail da variável de ambiente
-    usuario = os.getenv("USER")
+    usuario = os.getenv("SEU_USUARIO")
     if usuario:
         campo_texto_usuario.send_keys(usuario)
     else:
@@ -86,7 +86,7 @@ def inserir_senha(driver):
     time.sleep(2)
 
     # Obtém a senha da variável de ambiente
-    senha = os.getenv("PASSWORD")
+    senha = os.getenv("SUA_SENHA")
     if senha:
         campo_texto_senha.send_keys(senha)
     else:
